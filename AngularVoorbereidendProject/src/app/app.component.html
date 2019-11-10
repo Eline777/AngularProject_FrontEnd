@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <h1>Pollvoter</h1>
+      <span class="menu-spacer"></span>
+    <div>
+      <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a mat-button routerLink="/inloggen" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inloggen</a>
+      <a mat-button routerLink="/registreren" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Registreren</a>
+    </div>
+ </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+    <div class="container">
+        <a class="navbar-brand">Angular Router</a>
+        <ul class="nav navbar-nav" routerLinkActive="active">
+            <li class="nav-item"><a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="/inloggen-registreren" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inloggen</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="/inloggen-registreren" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Registreren</a></li>
+        </ul>
+    </div>
+</nav> -->
+
+
+<router-outlet></router-outlet>

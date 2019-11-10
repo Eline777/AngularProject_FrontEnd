@@ -1,0 +1,17 @@
+<h2>Template driven form security</h2>
+<form #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <p>{{ userLogin | json}}</p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="Username" type="text" required minlength="2" [(ngModel)]="userLogin.username" name="username" />
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field>
+            <input matInput placeholder="Password" type="text" required [(ngModel)]="userLogin.password" name="password" #passwordcontrol/>
+        </mat-form-field>
+    </p>
+    <p>Control state: {{passwordcontrol.className}}</p>
+    <p><button mat-raised-button color="primary" type="submit" [disabled]="!userForm.form.valid || submitted">{{tekstKnop}}</button></p>
+</form>
+
