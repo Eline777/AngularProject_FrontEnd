@@ -1,4 +1,12 @@
 export class Gebruiker {
-    constructor(public gebruikerID: number, public email: string, public wachtwoord: string, public gebruikersnaam: string){
+    email: string;
+    wachtwoord: string;
+    gebruikersnaam: string;
+    token: string;
+    constructor( email: string, wachtwoord: string, gebruikersnaam: string, token: string){
+        this.email = email;
+        this.wachtwoord = wachtwoord;
+        this.gebruikersnaam = gebruikersnaam;
+        this.token = token;
     }
 }

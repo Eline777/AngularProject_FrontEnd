@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Registreer } from '../models/registreer.model';
 import { Login } from '../models/login.model';
+import { AuthenticateService } from 'src/app/security/services/authenticate.service';
+import { GebruikerService } from 'src/app/gebruikers/gebruiker.service';
+import { Gebruiker } from 'src/app/gebruikers/models/gebruiker.model';
 
 @Component({
   selector: 'app-inloggen-registreren',
@@ -9,25 +12,47 @@ import { Login } from '../models/login.model';
   styleUrls: ['./inloggen-registreren.component.scss']
 })
 export class InloggenRegistrerenComponent implements OnInit {
-registreren: Boolean = false;
-inloggen: Boolean = false;
-gebruikerRegistreer: Registreer = new Registreer("", "", "");
+isRegistreren: Boolean = false;
+isInloggen: Boolean = false;
+gebruikerRegistreer: Registreer = new Registreer("", "", "", "");
 gebruikerLogin: Login = new Login("", "");
-tekstKnop = "";
+submitted: Boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private _authenticateService: AuthenticateService, private _gebruikerService: GebruikerService) {
     if(router.url == "/inloggen"){
-      this.inloggen = true;
-      this.tekstKnop = "Inloggen";
+      this.isInloggen = true;
     }
     if(router.url == "/registreren"){
-      this.registreren = true;
-      this.tekstKnop = "Registreren";
+      this.isRegistreren = true;
     }
     //console.log(router.url)
    }
 
   ngOnInit() {
   }
+
+  onSubmit() {
+    this.submitted = true;
+    if(this.isInloggen == true){
+      console.log(this.gebruikerLogin);
+      this._authenticateService.authenticate(this.gebruikerLogin).subscribe(result => {
+        localStorage.setItem("token",result.token);
+        this.router.navigateByUrl("/dashboard");
+        });
+    }
+    if(this.isRegistreren == true){
+      if(this.gebruikerRegistreer.wachtwoord == this.gebruikerRegistreer.wachtwoordBevestiging){
+        console.log(this.gebruikerRegistreer);
+        let nieuweGebruiker = new Gebruiker(this.gebruikerRegistreer.email,this.gebruikerRegistreer.wachtwoord, this.gebruikerRegistreer.gebruikersnaam, "");
+        console.log(nieuweGebruiker)
+        this._gebruikerService.addGebruiker(nieuweGebruiker).subscribe();
+      }
+    }
+
+
+     
+    
+     
+    }
 
 }

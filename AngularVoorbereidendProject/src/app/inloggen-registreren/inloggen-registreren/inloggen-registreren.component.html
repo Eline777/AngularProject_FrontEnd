@@ -1,17 +1,52 @@
-<h2>Template driven form security</h2>
-<form #userForm="ngForm" (ngSubmit)="onSubmit()">
-    <p>{{ userLogin | json}}</p>
-    <p>
-        <mat-form-field>
-            <input matInput placeholder="Username" type="text" required minlength="2" [(ngModel)]="userLogin.username" name="username" />
-        </mat-form-field>
-    </p>
-    <p>
-        <mat-form-field>
-            <input matInput placeholder="Password" type="text" required [(ngModel)]="userLogin.password" name="password" #passwordcontrol/>
-        </mat-form-field>
-    </p>
-    <p>Control state: {{passwordcontrol.className}}</p>
-    <p><button mat-raised-button color="primary" type="submit" [disabled]="!userForm.form.valid || submitted">{{tekstKnop}}</button></p>
-</form>
+    <div *ngIf="isRegistreren">
+            <h2>Registreren</h2>
+            <form #gebruikerRegistreerForm="ngForm" (ngSubmit)="onSubmit()">
+            <p>{{ gebruikerRegistreer | json}}</p>
+            <p>
+                <mat-form-field>
+                    <input matInput placeholder="Gebruikersnaam" type="text" required minlength="2" [(ngModel)]="gebruikerRegistreer.gebruikersnaam" name="gebruikersnaam" />
+                </mat-form-field>
+            </p>
+            <p>
+                    <mat-form-field>
+                        <input matInput placeholder="Email" type="text" required minlength="10" [(ngModel)]="gebruikerRegistreer.email" name="email" />
+                    </mat-form-field>
+                </p>
+            <p>
+                <mat-form-field>
+                    <input matInput placeholder="Passwoord" type="text" required [(ngModel)]="gebruikerRegistreer.wachtwoord" name="wachtwoord" #passwordcontrol/>
+                </mat-form-field>
+            </p>
+                <p>
+                    <mat-form-field >
+                        <input matInput placeholder="Bevestig passwoord" type="text" required [(ngModel)]="gebruikerRegistreer.wachtwoordBevestiging" name="wachtwoordBevestiging" #passwordcontrol/>
+                    </mat-form-field>
+                </p>
+                
+            
+            <p>Control state: {{passwordcontrol.className}}</p>
+            <p><button mat-raised-button color="primary" type="submit" [disabled]="!gebruikerRegistreerForm.form.valid || submitted">Registreren</button></p>
+    </form>
+        </div>
+
+
+    <div *ngIf="isInloggen">
+            <h2>Inloggen</h2>
+            <form #gebruikerLoginForm="ngForm" (ngSubmit)="onSubmit()">
+            <p>{{ gebruikerLogin | json}}</p>
+            <p>
+                <mat-form-field>
+                    <input matInput placeholder="Email" type="text" required minlength="2" [(ngModel)]="gebruikerLogin.email" name="email" />
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <input matInput placeholder="Passwoord" type="text" required [(ngModel)]="gebruikerLogin.wachtwoord" name="wachtwoord" #passwordcontrol/>
+                </mat-form-field>
+            </p>
+            <p>Control state: {{passwordcontrol.className}}</p>
+            <p><button mat-raised-button color="primary" type="submit" [disabled]="!gebruikerLoginForm.form.valid || submitted">Inloggen</button></p>
+        </form>
+        </div>
+
 

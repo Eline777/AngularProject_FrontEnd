@@ -11,17 +11,25 @@ import { InloggenRegistrerenComponent } from './inloggen-registreren/inloggen-re
 import { MatSidenavModule, MatListModule, MatToolbarModule, MatButtonModule } from '@angular/material';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+import { SecurityModule } from './security/security.module';
+import { AccountActivatieComponent } from './account-activatie/account-activatie/account-activatie.component';
+import { AccountActivatieModule } from './account-activatie/account-activatie.module';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'inloggen', component: InloggenRegistrerenComponent },
   { path: 'registreren', component: InloggenRegistrerenComponent },
+ // { path: 'activeren', component: AccountActivatieComponent },
+  { path: 'dashboard', component: DashboardComponent },
+   { path: 'activeren/:activatiecode', component: AccountActivatieComponent }
   ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,9 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatButtonModule,
     InloggenRegistrerenModule,
-    SharedModule
+    SharedModule,
+    SecurityModule,
+    AccountActivatieModule
   ],
   providers: [],
   bootstrap: [AppComponent]

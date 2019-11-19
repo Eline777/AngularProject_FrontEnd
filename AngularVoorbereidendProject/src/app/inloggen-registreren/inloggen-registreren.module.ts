@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InloggenRegistrerenComponent } from './inloggen-registreren/inloggen-registreren.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -8,6 +9,7 @@ import { InloggenRegistrerenComponent } from './inloggen-registreren/inloggen-re
   declarations: [InloggenRegistrerenComponent],
   imports: [
     CommonModule,
+    SharedModule
 
   ],
   exports: [InloggenRegistrerenComponent]

@@ -1,8 +1,8 @@
 export class Login {
-    gebruikersnaam: string;
+    email: string;
     wachtwoord: string;
-constructor(gebruikersnaam: string, wachtwoord: string){
-this.gebruikersnaam = gebruikersnaam;
+constructor(email: string, wachtwoord: string){
+this.email = email;
 this.wachtwoord = wachtwoord;
 }   
 }
