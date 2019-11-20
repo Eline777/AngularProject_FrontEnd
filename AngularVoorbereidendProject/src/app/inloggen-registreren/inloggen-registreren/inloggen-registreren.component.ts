@@ -5,6 +5,8 @@ import { Login } from '../models/login.model';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { GebruikerService } from 'src/app/gebruikers/gebruiker.service';
 import { Gebruiker } from 'src/app/gebruikers/models/gebruiker.model';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-inloggen-registreren',
@@ -17,6 +19,8 @@ isInloggen: Boolean = false;
 gebruikerRegistreer: Registreer = new Registreer("", "", "", "");
 gebruikerLogin: Login = new Login("", "");
 submitted: Boolean = false;
+nieuweGebruiker: Gebruiker = null;
+
 
   constructor(private router: Router, private _authenticateService: AuthenticateService, private _gebruikerService: GebruikerService) {
     if(router.url == "/inloggen"){
@@ -25,7 +29,15 @@ submitted: Boolean = false;
     if(router.url == "/registreren"){
       this.isRegistreren = true;
     }
-    //console.log(router.url)
+    console.log(router.url)
+
+    this._authenticateService.isLoggedin.subscribe(e=> {
+      //Do something with the value of this BehaviorSubject
+      //Every time the value changes this code will be triggered
+      if (e == true){
+        this.router.navigate(['/dashboard']);
+      }
+    })
    }
 
   ngOnInit() {
@@ -36,23 +48,23 @@ submitted: Boolean = false;
     if(this.isInloggen == true){
       console.log(this.gebruikerLogin);
       this._authenticateService.authenticate(this.gebruikerLogin).subscribe(result => {
+        console.log(result);
+        this._authenticateService.isLoggedin.next(result.token ? true : false);
         localStorage.setItem("token",result.token);
-        this.router.navigateByUrl("/dashboard");
+        // this.router.navigateByUrl("/dashboard");
         });
     }
     if(this.isRegistreren == true){
       if(this.gebruikerRegistreer.wachtwoord == this.gebruikerRegistreer.wachtwoordBevestiging){
         console.log(this.gebruikerRegistreer);
-        let nieuweGebruiker = new Gebruiker(this.gebruikerRegistreer.email,this.gebruikerRegistreer.wachtwoord, this.gebruikerRegistreer.gebruikersnaam, "");
-        console.log(nieuweGebruiker)
-        this._gebruikerService.addGebruiker(nieuweGebruiker).subscribe();
+        this.nieuweGebruiker = new Gebruiker(this.gebruikerRegistreer.email,this.gebruikerRegistreer.wachtwoord, this.gebruikerRegistreer.gebruikersnaam, "");
+        //let nieuweGebruiker = new Gebruiker(this.gebruikerRegistreer.email,this.gebruikerRegistreer.wachtwoord, this.gebruikerRegistreer.gebruikersnaam, "");
+        console.log(this.nieuweGebruiker)
+        this._gebruikerService.addGebruiker(this.nieuweGebruiker).subscribe(result => {
+          console.log(result);
+        });
+       // this.router.navigateByUrl("/inloggen");
       }
+    }  
     }
-
-
-     
-    
-     
-    }
-
 }

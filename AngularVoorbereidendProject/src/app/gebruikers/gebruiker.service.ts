@@ -16,4 +16,6 @@ export class GebruikerService {
   controleerActivatieGebruiker(gebruikerID: Number, activatiecode: any){
     return this.http.post<Gebruiker>("https://localhost:44399/api/gebruiker/confirmEmail", gebruikerID, activatiecode);
   }
+
+
 }
