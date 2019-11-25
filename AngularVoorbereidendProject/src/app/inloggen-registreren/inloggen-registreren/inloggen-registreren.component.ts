@@ -20,6 +20,7 @@ gebruikerRegistreer: Registreer = new Registreer("", "", "", "");
 gebruikerLogin: Login = new Login("", "");
 submitted: Boolean = false;
 nieuweGebruiker: Gebruiker = null;
+hide = true;
 
 
   constructor(private router: Router, private _authenticateService: AuthenticateService, private _gebruikerService: GebruikerService) {
@@ -34,6 +35,7 @@ nieuweGebruiker: Gebruiker = null;
     this._authenticateService.isLoggedin.subscribe(e=> {
       //Do something with the value of this BehaviorSubject
       //Every time the value changes this code will be triggered
+      console.log(e);
       if (e == true){
         this.router.navigate(['/dashboard']);
       }
@@ -49,11 +51,14 @@ nieuweGebruiker: Gebruiker = null;
       console.log(this.gebruikerLogin);
       this._authenticateService.authenticate(this.gebruikerLogin).subscribe(result => {
         console.log(result);
+        //localStorage.setItem("huidigeGebruiker", result);
         this._authenticateService.isLoggedin.next(result.token ? true : false);
         localStorage.setItem("token",result.token);
+        //this.router.navigate(['/dashboard']);
         // this.router.navigateByUrl("/dashboard");
         });
     }
+
     if(this.isRegistreren == true){
       if(this.gebruikerRegistreer.wachtwoord == this.gebruikerRegistreer.wachtwoordBevestiging){
         console.log(this.gebruikerRegistreer);
@@ -64,6 +69,7 @@ nieuweGebruiker: Gebruiker = null;
           console.log(result);
         });
        // this.router.navigateByUrl("/inloggen");
+       this.router.navigate(['/inloggen']);
       }
     }  
     }

@@ -19,6 +19,7 @@ import { AuthGuard } from './security/guards/auth.guard';
 import { GebruikersModule } from './gebruikers/gebruikers.module';
 import { GebruikerService } from './gebruikers/gebruiker.service';
 import { HomeModule } from './home/home.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,7 +27,7 @@ const appRoutes: Routes = [
   { path: 'registreren', component: InloggenRegistrerenComponent },
  // { path: 'activeren', component: AccountActivatieComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-   { path: 'activeren/:activatiecode', component: AccountActivatieComponent }
+   { path: 'activeren/:id/:activatiecode', component: AccountActivatieComponent }
   ];
 
 @NgModule({
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     DashboardComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -47,11 +49,12 @@ const appRoutes: Routes = [
     MatButtonModule,
     HomeModule,
     InloggenRegistrerenModule,
-    SharedModule,
+    SharedModule.forRoot(),
     SecurityModule,
     AccountActivatieModule,
     GebruikersModule,
-    HomeModule
+    HomeModule,
+    FontAwesomeModule
   ],
   bootstrap: [AppComponent]
 })

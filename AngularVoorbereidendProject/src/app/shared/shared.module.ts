@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatSidenavModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatSidenavModule, MatIconModule } from '@angular/material';
 import { NavigatieComponent } from './navigatie/navigatie.component';
-
+import { GebruikerService } from '../gebruikers/gebruiker.service';
+import { ModuleWithProviders } from '@angular/core';
+import { PollsService } from '../polls/polls.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 @NgModule({
@@ -16,7 +19,9 @@ import { NavigatieComponent } from './navigatie/navigatie.component';
     MatButtonModule,
     MatCardModule,
     MatSidenavModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
+    AngularFontAwesomeModule
    
   ],
   exports: [
@@ -27,7 +32,17 @@ import { NavigatieComponent } from './navigatie/navigatie.component';
     MatSidenavModule,
     ReactiveFormsModule,
     FormsModule,
-    NavigatieComponent
-  ]
+    NavigatieComponent,
+    MatIconModule,
+    AngularFontAwesomeModule
+  ],
+  providers: [GebruikerService, PollsService]
 })
-export class SharedModule { }
+export class SharedModule { 
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [GebruikerService, PollsService]
+    }
+  }
+}

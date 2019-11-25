@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { GebruikerService } from '../gebruikers/gebruiker.service';
 import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
-import { HomeService } from './home.service';
 
 
 
@@ -12,7 +11,7 @@ import { HomeService } from './home.service';
   imports: [
     CommonModule, SharedModule
   ],
-  providers: [HomeService],
+  providers: [],
   exports: []
 })
 export class HomeModule { }

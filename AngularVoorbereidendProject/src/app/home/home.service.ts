@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 export class HomeService {
 
   constructor(private http: HttpClient) { }
-  getGebruikers(): Observable<Gebruiker[]> {
-    return this.http.get<Gebruiker[]>("https://localhost:44399/api/gebruiker", {
-    //headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
-});
-}
+//   getGebruikers(): Observable<Gebruiker[]> {
+//     return this.http.get<Gebruiker[]>("https://localhost:44399/api/gebruiker", {
+//     //headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
+// });
+// }
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GebruikerService } from '../gebruikers/gebruiker.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Gebruiker } from '../gebruikers/models/gebruiker.model';
 import { map, tap } from 'rxjs/operators';
-import { HomeService } from './home.service';
+import { PollsService } from '../polls/polls.service';
 
 @Component({
   selector: 'app-home',
@@ -12,27 +12,54 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent implements OnInit {
   gebruikers: Observable<Gebruiker[]>;
-  aantal: number = 0;
+  aantalGebruikers: number = 0;
+  aantalGebruikersSub: Subscription;
+  aantalPollsSub: Subscription;
+  aantalPolls: number = 0;
 
-  constructor(private _homeService: HomeService) {
+  constructor(private _gebruikerService: GebruikerService, private _pollService: PollsService) {
     this.getAantalGebruikers();
-    console.log(this.aantal);
+    this.getAantalPolls();
+    console.log(this.aantalPolls);
    }
 
   ngOnInit() {
   }
 
+  // getAantalGebruikers(){
+  //   console.log("test");
+  //   this.gebruikers = this._gebruikerService.getGebruikers()
+  //   .pipe(
+  //     map(result => {
+  //       return result;
+  //     }),
+  //     tap(t => {
+  //       console.log(t);
+  //       console.log(t.length);
+  //       this.aantalGebruikers = t.length;})
+  //   );
+  // }
+
   getAantalGebruikers(){
     console.log("test");
-    this.gebruikers = this._homeService.getGebruikers()
-    .pipe(
-      map(result => {
-        return result;
-      }),
-      tap(t => {
-        console.log(t);
-        console.log(t.length);
-        this.aantal = t.length;})
-    );
+    this.aantalGebruikersSub = this._gebruikerService.getAantalGebruikers().subscribe((aantal: number) => {
+      this.aantalGebruikers = aantal;
+    })
   }
+
+  getAantalPolls(){
+    console.log("test");
+    this.aantalPollsSub = this._pollService.getAantalPolls().subscribe((aantal: number) => {
+      this.aantalPolls = aantal;
+    })
+  }
+
+  // getAantalGebruikers(){
+  //   console.log("test");
+  //   this._gebruikerService.getAantalGebruikers().subscribe(result => {
+  //     this.aantalGebruikers = result;
+  //   }
+      
+  //   );
+  // }
 }

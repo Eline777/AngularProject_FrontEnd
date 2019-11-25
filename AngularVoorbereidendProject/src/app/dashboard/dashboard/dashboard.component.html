@@ -1,21 +1,55 @@
-<div id="page-wrapper">
+<app-navigatie></app-navigatie>
+<div id="page-wrapper"> 
         <div class="container-fluid">
-                <!-- <mat-sidenav-container class="example-container">
-                        <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
-                                     (closed)="events.push('close!')">
-                          Sidenav content
-                        </mat-sidenav>
-                      
-                        <mat-sidenav-content>
-                          <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
-                          <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
-                          <p>Events:</p>
-                          <div class="example-events">
-                            <div *ngFor="let e of events">{{e}}</div>
-                          </div>
-                        </mat-sidenav-content>
-                      </mat-sidenav-container>     -->
-                      <app-navigatie></app-navigatie>
+            <div class="row row-stat">
+                <div class="col-lg-5">
+                    <div class="panel panel-light noborder">
+                        <div class="panel-heading noborder">
+                            <div class="panel-icon"><i class="fa fa-user-friends"></i></div>
+                            <div class="media-body">
+                                <h2 class="mt5">Vriendschapverzoeken</h2>
+                            </div><!-- media-body -->
+                            <hr>
+                            <div class="clearfix mt20">
+                                <!-- <div class="pull-left">
+                                    <h5 class="md-title nomargin">...</h5>
+                                    <h4 class="nomargin">...</h4>
+                                </div> -->
+                                <div class="pull-right">
+                                    <h5 class="md-title nomargin"></h5>
+                                    <h4 class="nomargin"></h4>
+                                </div>
+                            </div>
+    
+                        </div><!-- panel-body -->
+                    </div><!-- panel -->
+                </div><!-- col-md-4 -->
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="panel panel-dark noborder">
+                        <div class="panel-heading noborder">
+                            <div class="panel-icon"><i class="fa fa-poll"></i></div>
+                            <div class="media-body">
+                                <h5 class="md-title nomargin">Nieuwe polls</h5>
+                                <h1 class="mt5">Nieuwe polls</h1>
+                            </div><!-- media-body -->
+                            <hr>
+                            <div class="clearfix mt20">
+                                <div class="pull-left">
+                                    <h5 class="md-title nomargin">Yesterday</h5>
+                                    <h4 class="nomargin">10,009</h4>
+                                </div>
+                                <div class="pull-right">
+                                    <h5 class="md-title nomargin">This Week</h5>
+                                    <h4 class="nomargin">178,222</h4>
+                                </div>
+                            </div>
+    
+                        </div><!-- panel-body -->
+                    </div><!-- panel -->
+                </div><!-- col-md-4 -->
+            </div>    
+                     
 <div class="row">
     <div class="col-xxxl-3 col-xxl-3 col-lg-3 col-md-3">
         <mat-card >
@@ -65,6 +99,7 @@
           </mat-card>
     </div>
   </div>
-</div></div>
+</div>
+<!-- </div> -->
 
   
