@@ -1,23 +1,32 @@
 <div class="sidebar hidden-sm-down">
         <ul class="nav in" id="side-menu">
             <li class="user-pro">
-                <a href="#" class="text-center">
-                    <span >naam</span>
+                <a  class="text-center">
+                    <span >{{voornaam}} {{achternaam}}</span>
                 </a>
             </li>
-            <li><a routerLink="/dashboard" routerLinkActive="active" class="waves-effect"><i class="fa fa-home"></i> <span
+            <li><a routerLink="/dashboard" routerLinkActive="active" class="waves-effect">
+                <i class="material-icons">home</i>
+                <span
                     class="hide-menu">Dashboard</span></a></li>
             <li>
                 <a routerLink="/vrienden" routerLinkActive="active">
-                    <i class="fa fa-edit"></i>
+                    <i class="material-icons">group</i>
                     <span class="hide-menu">Vrienden</span>
                 </a>
             </li>
             <li>
                 <a  routerLink="/polls" routerLinkActive="active">
-                    <i class="fa fa-edit"></i>
+                    <i class="material-icons">poll</i>
                     <span class="hide-menu">Polls</span>
                 </a>
             </li>
+
+            <li>
+                    <a routerLink="home" routerLinkActive="active">
+                            <i class="material-icons">exit_to_app</i>
+                        <span class="hide-menu">Uitloggen</span>
+                    </a>
+                </li>
         </ul>
     </div>

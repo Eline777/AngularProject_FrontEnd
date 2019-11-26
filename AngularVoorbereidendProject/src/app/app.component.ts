@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticateService} from 'src/app/security/services/authenticate.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  toonBasisRoutes: Boolean = true;
   title = 'AngularVoorbereidendProject';
+  constructor(private _authenticateService: AuthenticateService) {
+    this._authenticateService.isLoggedin.subscribe(e=> {
+      //Do something with the value of this BehaviorSubject
+      //Every time the value changes this code will be triggered
+      if(e == true){
+        this.toonBasisRoutes = false;
+      }
+      else{
+        this.toonBasisRoutes = true;
+      }
+      }) 
+   }
 }

@@ -16,7 +16,7 @@ import { map, tap } from 'rxjs/operators';
 export class InloggenRegistrerenComponent implements OnInit {
 isRegistreren: Boolean = false;
 isInloggen: Boolean = false;
-gebruikerRegistreer: Registreer = new Registreer("", "", "", "");
+gebruikerRegistreer: Registreer = new Registreer("", "", "", "", "", "");
 gebruikerLogin: Login = new Login("", "");
 submitted: Boolean = false;
 nieuweGebruiker: Gebruiker = null;
@@ -36,9 +36,9 @@ hide = true;
       //Do something with the value of this BehaviorSubject
       //Every time the value changes this code will be triggered
       console.log(e);
-      if (e == true){
-        this.router.navigate(['/dashboard']);
-      }
+      //if (e == true){
+       // this.router.navigate(['/dashboard']);
+     // }
     })
    }
 
@@ -54,7 +54,10 @@ hide = true;
         //localStorage.setItem("huidigeGebruiker", result);
         this._authenticateService.isLoggedin.next(result.token ? true : false);
         localStorage.setItem("token",result.token);
-        //this.router.navigate(['/dashboard']);
+        localStorage.setItem("gebruikerID", result.gebruikerID.toString());
+        localStorage.setItem("voornaam", result.voornaam.toString());
+        localStorage.setItem("achternaam", result.achternaam.toString());
+        this.router.navigate(['/dashboard']);
         // this.router.navigateByUrl("/dashboard");
         });
     }
@@ -62,14 +65,14 @@ hide = true;
     if(this.isRegistreren == true){
       if(this.gebruikerRegistreer.wachtwoord == this.gebruikerRegistreer.wachtwoordBevestiging){
         console.log(this.gebruikerRegistreer);
-        this.nieuweGebruiker = new Gebruiker(this.gebruikerRegistreer.email,this.gebruikerRegistreer.wachtwoord, this.gebruikerRegistreer.gebruikersnaam, "");
+        this.nieuweGebruiker = new Gebruiker(this.gebruikerRegistreer.email,this.gebruikerRegistreer.wachtwoord, this.gebruikerRegistreer.gebruikersnaam, "", this.gebruikerRegistreer.voornaam, this.gebruikerRegistreer.achternaam);
         //let nieuweGebruiker = new Gebruiker(this.gebruikerRegistreer.email,this.gebruikerRegistreer.wachtwoord, this.gebruikerRegistreer.gebruikersnaam, "");
         console.log(this.nieuweGebruiker)
         this._gebruikerService.addGebruiker(this.nieuweGebruiker).subscribe(result => {
           console.log(result);
         });
        // this.router.navigateByUrl("/inloggen");
-       this.router.navigate(['/inloggen']);
+       this.router.navigate(['/account-activatie']);
       }
     }  
     }

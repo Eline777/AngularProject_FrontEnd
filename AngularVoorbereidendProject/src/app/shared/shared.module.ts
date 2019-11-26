@@ -7,6 +7,7 @@ import { GebruikerService } from '../gebruikers/gebruiker.service';
 import { ModuleWithProviders } from '@angular/core';
 import { PollsService } from '../polls/polls.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AuthenticateService } from '../security/services/authenticate.service';
 
 
 @NgModule({
@@ -36,13 +37,13 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     MatIconModule,
     AngularFontAwesomeModule
   ],
-  providers: [GebruikerService, PollsService]
+  providers: [GebruikerService, PollsService, AuthenticateService]
 })
 export class SharedModule { 
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: [GebruikerService, PollsService]
+      providers: [GebruikerService, PollsService, AuthenticateService]
     }
   }
 }

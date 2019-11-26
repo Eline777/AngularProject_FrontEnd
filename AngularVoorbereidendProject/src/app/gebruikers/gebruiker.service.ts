@@ -14,8 +14,8 @@ export class GebruikerService {
     return this.http.post<Gebruiker>("https://localhost:44399/api/gebruiker", gebruiker);
     }
 
-  controleerActivatieGebruiker(gebruikerID: Number, activatiecode: any){
-    return this.http.post<Gebruiker>("https://localhost:44399/api/gebruiker/confirmEmail", gebruikerID, activatiecode);
+  controleerActivatieGebruiker(activatiecode: any){
+    return this.http.post<any>("https://localhost:44399/api/gebruiker/confirmEmail/" + activatiecode,null);
   }
 
   getAantalGebruikers(): Observable<number> {
@@ -23,10 +23,10 @@ export class GebruikerService {
     //headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
 });
   }
-  getGebruikers(): Observable<Gebruiker[]> {
-    return this.http.get<Gebruiker[]>("https://localhost:44399/api/gebruiker", {
-    //headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
-  });
-  }
+  // getGebruikers(): Observable<Gebruiker[]> {
+  //   return this.http.get<Gebruiker[]>("https://localhost:44399/api/gebruiker", {
+  //   //headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token"))
+  // });
+  // }
 
 }

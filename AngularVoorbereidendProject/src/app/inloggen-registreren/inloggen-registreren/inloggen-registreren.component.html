@@ -6,8 +6,22 @@
                     <div class="panel-heading panel-heading-divider">Registreren</div>
                     <div class="panel-body">
                         <form #gebruikerRegistreerForm="ngForm" (ngSubmit)="onSubmit()">
-                            <p>{{ gebruikerRegistreer | json}}</p>
+                            <!-- <p>{{ gebruikerRegistreer | json}}</p> -->
                             <div class="input-container">
+                                    <p>
+                                            <mat-form-field  >
+                                                <input matInput placeholder="Voornaam" type="text" class="form-control input-pill"
+                                                    required minlength="2" [(ngModel)]="gebruikerRegistreer.voornaam"
+                                                    name="voornaam" />
+                                            </mat-form-field>
+                                        </p>
+                                        <p>
+                                                <mat-form-field  >
+                                                    <input matInput placeholder="Achternaam" type="text" class="form-control input-pill"
+                                                        required minlength="2" [(ngModel)]="gebruikerRegistreer.achternaam"
+                                                        name="achternaam" />
+                                                </mat-form-field>
+                                            </p>
                                 <p>
                                     <mat-form-field floatPlaceholder="never"  >
                                         <input matInput placeholder="Gebruikersnaam" type="text" class="form-control input-pill"
@@ -56,7 +70,7 @@
                                     </mat-form-field>
                                 </p>
 
-                                <p>Control state: {{passwordcontrol.className}}</p>
+                                <!-- <p>Control state: {{passwordcontrol.className}}</p> -->
                                 <p>
                                     <button mat-raised-button color="primary" type="submit"
                                         [disabled]="!gebruikerRegistreerForm.form.valid || submitted">Registreren</button>
@@ -72,7 +86,7 @@
                         <div class="panel-heading panel-heading-divider">Inloggen</div>
                         <div class="panel-body">
                             <form #gebruikerLoginForm="ngForm" (ngSubmit)="onSubmit()">
-                                <p>{{ gebruikerLogin | json}}</p>
+                                <!-- <p>{{ gebruikerLogin | json}}</p> -->
                                 <div class="input-container">
                                     <p>
                                         <mat-form-field  >
@@ -93,7 +107,7 @@
                                             </button>
                                         </mat-form-field>
                                     </p>
-                                    <p>Control state: {{passwordcontrol.className}}</p>
+                                    <!-- <p>Control state: {{passwordcontrol.className}}</p> -->
                                     <p>
                                         <button mat-raised-button color="primary" type="submit"
                                             [disabled]="!gebruikerLoginForm.form.valid || submitted">Inloggen</button>
