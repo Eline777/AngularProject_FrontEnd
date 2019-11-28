@@ -1,41 +1,44 @@
 <app-navigatie></app-navigatie>
-<div id="page-wrapper"> 
-        <div class="container-fluid">
-            <div class="row row-stat">
-                <div class="col-lg-5">
-                    <div class="panel panel-light noborder">
-                        <div class="panel-heading noborder">
-                            <div class="panel-icon"><i class="material-icons md-48">group</i></div>
-                            <div class="media-body">
-                                <h2 class="mt5">Vriendschapverzoeken</h2>
-                            </div><!-- media-body -->
-                            <hr>
-                            <div class="clearfix mt20">
-                                <!-- <div class="pull-left">
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row row-stat">
+            <div class="col-lg-5">
+                <div class="panel panel-light noborder">
+                    <div class="panel-heading noborder">
+                        <div class="panel-icon"><i class="material-icons md-48">group</i></div>
+                        <div class="media-body">
+                            <!-- <h3 class="mt5">{{aantalVriendschapverzoeken}}</h3>
+                                    <h2 class="mt5">Vriendschapverzoeken</h2> -->
+                            <h1 class="nomargin">{{aantalVriendschapverzoeken}}</h1>
+                            <h5 class="mt5">Vriendschapverzoeken</h5>
+                        </div><!-- media-body -->
+                        <hr>
+                        <div class="clearfix mt20">
+                            <!-- <div class="pull-left">
                                     <h5 class="md-title nomargin">...</h5>
                                     <h4 class="nomargin">...</h4>
                                 </div> -->
-                                <div class="pull-right">
-                                    <h5 class="md-title nomargin"></h5>
-                                    <h4 class="nomargin"></h4>
-                                </div>
+                            <div class="pull-right">
+                                <h5 class="md-title nomargin"></h5>
+                                <h4 class="nomargin"></h4>
                             </div>
-    
-                        </div><!-- panel-body -->
-                    </div><!-- panel -->
-                </div><!-- col-md-4 -->
+                        </div>
 
-                <div class="col-lg-4 col-md-6">
-                    <div class="panel panel-dark noborder">
-                        <div class="panel-heading noborder">
-                            <div class="panel-icon"><i class="material-icons md-48">poll</i></div>
-                            <div class="media-body">
-                                <!-- <h5 class="md-title nomargin">Nieuwe polls</h5> -->
-                                <h1 class="mt5">Nieuwe polls</h1>
-                            </div><!-- media-body -->
-                            <hr>
-                            <div class="clearfix mt20">
-                                <!-- <div class="pull-left">
+                    </div><!-- panel-body -->
+                </div><!-- panel -->
+            </div><!-- col-md-4 -->
+
+            <div class="col-lg-4 col-md-6">
+                <div class="panel panel-dark noborder">
+                    <div class="panel-heading noborder">
+                        <div class="panel-icon"><i class="material-icons md-48">poll</i></div>
+                        <div class="media-body">
+                            <h1 class="mt5">{{aantalPollUitnodigingen}}</h1>
+                            <h5 class="mt5">Uitnodigingen polls</h5>
+                        </div><!-- media-body -->
+                        <hr>
+                        <div class="clearfix mt20">
+                            <!-- <div class="pull-left">
                                     <h5 class="md-title nomargin">Yesterday</h5>
                                     <h4 class="nomargin">10,009</h4>
                                 </div>
@@ -43,14 +46,74 @@
                                     <h5 class="md-title nomargin">This Week</h5>
                                     <h4 class="nomargin">178,222</h4>
                                 </div> -->
-                            </div>
-    
-                        </div><!-- panel-body -->
-                    </div><!-- panel -->
-                </div><!-- col-md-4 -->
-            </div>    
-                     
-<div class="row">
+                        </div>
+
+                    </div><!-- panel-body -->
+                </div><!-- panel -->
+            </div><!-- col-md-4 -->
+        </div>
+
+        <div class="row cards">
+            <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+                <mat-card>
+                    <mat-card-header>
+                        <div mat-card-avatar class="cards-header-image"><i class="material-icons md-48">poll</i></div>
+                        <mat-card-title>Mijn polls</mat-card-title>
+                        <mat-card-subtitle></mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                    </mat-card-content>
+                    <mat-card-actions>
+                            <!-- <a mat-button routerLink="/polls" routerLinkActive="active">
+                                <span class="hide-menu">Nieuwe poll aanmaken</span>
+                            </a> -->
+                        <button mat-button routerLink="/pollMaken">Poll maken</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+
+            <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Vriendschapsverzoeken</mat-card-title>
+                        <mat-card-subtitle>1 nieuw verzoek</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Vrienden</mat-card-title>
+                        <mat-card-subtitle>10</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+
+            <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Uitnodigingen polls</mat-card-title>
+                        <mat-card-subtitle>0</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+
+        <!-- <div class="row">
     <div class="col-xxxl-3 col-xxl-3 col-lg-3 col-md-3">
         <mat-card >
             <mat-card-header >
@@ -98,8 +161,6 @@
             </mat-card-content>
           </mat-card>
     </div>
-  </div>
-</div>
-<!-- </div> -->
-
-  
+  </div> -->
+    </div>
+    <!-- </div> -->

@@ -1,11 +1,17 @@
+import { Antwoord } from './antwoord.model';
+import { PollGebruiker } from './poll-gebruiker.model';
+
 export class Poll {
-    id: number;
+    pollID: number;
     naam: string;
     makerID: number;
-    constructor( id: number, naam: string, makerID: number){
-        this.id = id;
+    lijstMogelijkeAntwoorden: Antwoord[];
+    lijstGebruikersPoll: PollGebruiker[];
+    constructor( id: number, naam: string, makerID: number, antwoorden: Antwoord[], pollGebruikers: PollGebruiker[]){
+        this.pollID = id;
         this.naam = naam;
         this.makerID = makerID;
-       
+        this.lijstMogelijkeAntwoorden = antwoorden;
+        this.lijstGebruikersPoll = pollGebruikers;
     }
 }

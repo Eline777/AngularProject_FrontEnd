@@ -6,7 +6,6 @@ import { NavigatieComponent } from './navigatie/navigatie.component';
 import { GebruikerService } from '../gebruikers/gebruiker.service';
 import { ModuleWithProviders } from '@angular/core';
 import { PollsService } from '../polls/polls.service';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AuthenticateService } from '../security/services/authenticate.service';
 
 
@@ -22,8 +21,6 @@ import { AuthenticateService } from '../security/services/authenticate.service';
     MatSidenavModule,
     FormsModule,
     MatIconModule,
-    AngularFontAwesomeModule
-   
   ],
   exports: [
     MatInputModule,
@@ -34,8 +31,7 @@ import { AuthenticateService } from '../security/services/authenticate.service';
     ReactiveFormsModule,
     FormsModule,
     NavigatieComponent,
-    MatIconModule,
-    AngularFontAwesomeModule
+    MatIconModule
   ],
   providers: [GebruikerService, PollsService, AuthenticateService]
 })

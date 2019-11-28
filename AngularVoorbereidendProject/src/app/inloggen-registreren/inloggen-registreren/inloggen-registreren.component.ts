@@ -51,14 +51,12 @@ hide = true;
       console.log(this.gebruikerLogin);
       this._authenticateService.authenticate(this.gebruikerLogin).subscribe(result => {
         console.log(result);
-        //localStorage.setItem("huidigeGebruiker", result);
         this._authenticateService.isLoggedin.next(result.token ? true : false);
         localStorage.setItem("token",result.token);
         localStorage.setItem("gebruikerID", result.gebruikerID.toString());
         localStorage.setItem("voornaam", result.voornaam.toString());
         localStorage.setItem("achternaam", result.achternaam.toString());
         this.router.navigate(['/dashboard']);
-        // this.router.navigateByUrl("/dashboard");
         });
     }
 
@@ -71,7 +69,6 @@ hide = true;
         this._gebruikerService.addGebruiker(this.nieuweGebruiker).subscribe(result => {
           console.log(result);
         });
-       // this.router.navigateByUrl("/inloggen");
        this.router.navigate(['/account-activatie']);
       }
     }  

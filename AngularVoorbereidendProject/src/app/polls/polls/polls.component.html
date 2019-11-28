@@ -1,1 +1,213 @@
-<p>polls works!</p>
+<app-navigatie></app-navigatie>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row row-stat">
+            <div class="col-sm-12">
+                <div class="panel panel-default " *ngIf="isAanmaken">
+                    <div class="panel-heading panel-heading-divider">Poll aanmaken</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="naam" name="titel"
+                                        [(ngModel)]="naam" class="marginPolls" />
+                                    <span>
+                                        <button mat-raised-button color="primary" (click)="addNaam()">
+                                            <i class="material-icons marginPolls">add</i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div *ngIf="titelPollIsToegevoegd">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="antwoord" name="antwoord"
+                                            [(ngModel)]="antwoord" class="marginPolls" />
+                                        <button mat-raised-button color="primary" (click)="addAntwoord()"><i
+                                                class="material-icons">add</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                    <form #pollForm="ngForm" (ngSubmit)="onSubmit()">
+                                        <p>{{ nieuwePoll | json}}</p>
+                                        <div class="input-container">
+                                            <!-- <mat-form-field> -->
+                                            <h3>{{titelPoll}}</h3>
+                                            <!-- </mat-form-field>  -->
+                                            <!-- <mat-form-field> -->
+                                            <div class="row">
+                                                <ul class="list-group">
+                                                    <li *ngFor="let antwoord of antwoorden" >
+                                                        <span> {{ antwoord }} </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <!-- </mat-form-field>  -->
+                                            <!-- <mat-checkbox [(ngModel)]="checkbox" required>Heeft poll 2 of meerdere keuzemogelijkheden</mat-checkbox> -->
+                                            <!-- <mat-form-field><input matInput type="text" [(ngModel)]="status" required
+                                                    minlength="2" name="status"></mat-form-field> -->
+                                                    <mat-accordion>
+                                                            <mat-expansion-panel>
+                                                              <mat-expansion-panel-header>
+                                                                <mat-panel-title>
+                                                                  Vrienden uitnodigen
+                                                                </mat-panel-title>
+                                                              </mat-expansion-panel-header>
+                                                              <mat-selection-list class="scrollableList" [(ngModel)]="vrienden" (click)="onSelectionChangeMake(make._value)">
+                                                                  <!-- <mat-list-option *ngFor="let make of allMakes" [value]="make.make_id">
+                                                                    {{make.make_display}} -->
+                                                                    <mat-list-option *ngFor="let make of allMakes" [value]="make.make_id">
+                                                                      {{make.make_display}}
+                                                                  </mat-list-option>
+                                                              </mat-selection-list>
+                                                            </mat-expansion-panel>
+                                                          </mat-accordion>
+
+                                            <div *ngIf="isOk">
+                                                    <button mat-raised-button color="primary" type="submit"
+                                                    [disabled]="!pollForm.valid || submitted">Opslaan</button>
+                                            </div>
+
+                                                
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            
+                        </div>
+
+
+
+
+
+
+                      
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                    <!-- 
+                            <form #pollForm="ngForm" (ngSubmit)="onSubmit()">
+                                    <p>{{ pollForm | json}}</p>
+                                    <div class="input-container">
+                                            <mat-form-field>
+                                                    <input matInput placeholder="Naam/titel poll" type="text"
+                                                        class="form-control input-pill" required minlength="1"
+                                                        [(ngModel)]="pollForm.naam" name="naam" />
+                                                         <button mat-raised-button color="primary" (click)="addTitel()">Naam bewaren</button> 
+                                            </mat-form-field> 
+                                            <mat-form-field>
+                                                    <input matInput placeholder="Naam/titel poll" type="text"
+                                                        class="form-control input-pill" required minlength="1"
+                                                        [(ngModel)]="antwoord" name="antwoord" />
+                                                        <button mat-raised-button color="primary" (click)="addTitel()">Naam bewaren</button>
+                                            </mat-form-field>  -->
+
+
+                    <!-- <p>
+                                                <button mat-raised-button color="primary" type="submit" [disabled]="!pollForm.valid || submitted">Submit</button>
+                                        </p> 
+                                    </div>
+                                </form>  -->
+                    <!-- <form #antwoordForm="ngForm">
+                                        <p>{{ pollForm | json}}</p>
+                                        <div class="input-container">
+                                                <mat-form-field>
+                                                        <input matInput placeholder="Naam/titel poll" type="text"
+                                                            class="form-control input-pill" required minlength="1"
+                                                            [(ngModel)]="pollForm.naam" name="naam" /> -->
+                    <!-- <button mat-raised-button color="primary" (click)="addTitel()">Naam bewaren</button> -->
+                    <!-- </mat-form-field>  -->
+                    <!-- <mat-form-field>
+                                                        <input matInput placeholder="Naam/titel poll" type="text"
+                                                            class="form-control input-pill" required minlength="1"
+                                                            [(ngModel)]="antwoord" name="antwoord" />
+                                                            <button mat-raised-button color="primary" (click)="addTitel()">Naam bewaren</button>
+                                                </mat-form-field>  -->
+
+
+                    <!-- <p>
+                                                    <button mat-raised-button color="primary" type="submit" [disabled]="!pollForm.valid || submitted">Submit</button>
+                                            </p> -->
+                    <!-- </div>
+                                    </form>  -->
+
+                    <!-- <div class="row">
+                                    <div col="6"> -->
+                    <!-- <form [formGroup]="itemsForm" >
+                                                    <p>{{ itemsForm.value | json}}</p>
+                                                    <div class="input-container">
+                                                        <p>
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="Naam/titel" type="text"
+                                                                    class="form-control input-pill" required minlength="2"
+                                                                    formControlName="naam" />
+                                                                    <button mat-raised-button color="primary" (click)="addTitel(naam.value)">Naam bewaren</button>
+                                                            </mat-form-field>
+                                                        </p>
+                                                        <p>
+                                                                <mat-form-field>
+                                                                    <input matInput placeholder="Keuzemogelijkheid" type="text"
+                                                                        class="form-control input-pill" required minlength="2"
+                                                                        formControlName="antwoord" />
+                                                                        <button mat-raised-button color="primary" (click)="addAntwoord()">Keuzemogelijkheid toevoegen</button>
+                                                                </mat-form-field>
+                                                            </p>
+                                                    </div>
+                                                </form>
+                                    </div>
+
+
+
+                                    <div col="6">
+                                            <form [formGroup]="pollForm" (ngSubmit)="onSubmit()">
+                                                    <p>{{ pollForm.value | json}}</p>
+                                                    <div class="input-container">
+                                                            <h2>{{titelPoll}}</h2>
+                                                            <ul class="list-group" >
+                                                                    <li formArrayName="antwoorden" *ngFor="let item of pollForm.get('antwoorden').controls ; let i = index;" class="list-group-item">
+                                                                        <span [formGroupName]="i">
+                                                                                <mat-form-field>
+                                                                                        <input matInput placeholder="Keuzemogelijkheid" type="text"
+                                                                                            class="form-control input-pill" required minlength="1"
+                                                                                            formControlName="antwoord" />
+                                                                                            
+                                                                                    </mat-form-field>     
+                                                                        </span>
+                                                                    </li>
+                                                                </ul>
+                                                        <div formArrayName="antwoorden"
+                                                            *ngFor="let item of pollForm.get('antwoorden').controls; let i = index;">
+                                                            <div [formGroupName]="i">
+                                                                <mat-form-field>
+                                                                        <input matInput placeholder="Keuzemogelijkheid" type="text"
+                                                                            class="form-control input-pill" required minlength="1"
+                                                                            formControlName="antwoord" />
+                                                                            
+                                                                    </mat-form-field> 
+                                                            </div> 
+                        
+                                                            Chosen name: {{ pollForm.controls.antwoorden.controls[i].controls.antwoord.value }}
+                                                         </div> 
+                        
+                        
+                                                        <p>Control state: {{passwordcontrol.className}}</p> 
+                                                        <p>
+                                                                <button mat-raised-button color="primary" type="submit" [disabled]="!pollForm.valid || submitted">Submit</button>
+                                                        </p>
+                                                    </div>
+                                                </form> 
+                                    </div> -->
+                </div>
+
+
+            </div>
+        </div>
+    </div>

@@ -10,7 +10,7 @@ import { InloggenRegistrerenModule } from './inloggen-registreren/inloggen-regis
 import { InloggenRegistrerenComponent } from './inloggen-registreren/inloggen-registreren/inloggen-registreren.component'
 import { MatSidenavModule, MatListModule, MatToolbarModule, MatButtonModule } from '@angular/material';
 import { SharedModule } from './shared/shared.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityModule } from './security/security.module';
 import { AccountActivatieComponent } from './account-activatie/account-activatie/account-activatie.component';
 import { AccountActivatieModule } from './account-activatie/account-activatie.module';
@@ -19,23 +19,30 @@ import { AuthGuard } from './security/guards/auth.guard';
 import { GebruikersModule } from './gebruikers/gebruikers.module';
 import { GebruikerService } from './gebruikers/gebruiker.service';
 import { HomeModule } from './home/home.module';
-//import { FontAwesomeModule } from '@fontawesome/angular-fontawesome';
+import { UitloggenComponent } from './uitloggen/uitloggen/uitloggen.component';
+import { NavigatieComponent } from './shared/navigatie/navigatie.component';
+import { SecurityInterceptor } from './security/security.interceptor';
+import { PollsComponent } from './polls/polls/polls.component';
+import { PollsModule } from './polls/polls.module';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'inloggen', component: InloggenRegistrerenComponent },
   { path: 'registreren', component: InloggenRegistrerenComponent },
- // { path: 'activeren', component: AccountActivatieComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-   { path: 'activeren/:activatiecode', component: AccountActivatieComponent }
+  { path: 'activeren/:activatiecode', component: AccountActivatieComponent },
+  { path: 'uitloggen', component: UitloggenComponent },
+  { path: 'polls', component: PollsComponent },
+  { path: 'pollMaken', component: PollsComponent }
+
   ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DashboardComponent
-    
+    DashboardComponent,
+    UitloggenComponent  
   ],
   imports: [
     BrowserModule,
@@ -54,7 +61,14 @@ const appRoutes: Routes = [
     AccountActivatieModule,
     GebruikersModule,
     HomeModule,
-   // FontAwesomeModule
+    PollsModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecurityInterceptor,
+      multi: true
+      }
   ],
   bootstrap: [AppComponent]
 })

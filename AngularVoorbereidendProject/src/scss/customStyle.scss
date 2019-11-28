@@ -28,33 +28,12 @@ body #titel {
     background-color: #FFFBE0;
 }
 .home-container{
-    // height: 100%;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // position: relative;
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    //     justify-content: center;
-    //     height: 100%;
 	position:absolute;
 	left:45%;
 	top:25%;
     margin:-75px 0 0 -135px;
     background-color: #FFFBE0;
 }
-// .home-inner-container{
-//     height: 300px;
-//     width: 300px;
-//     left:0;
-//     top: 0;
-//     bottom: 0;
-//     right: 0;
-//     margin: auto;
-//     position: absolute;
-//     background-color: red;
-// }
 /*@import "assets/css/style.default.css";*/
 .sidebar {
   z-index: 10;
@@ -226,6 +205,15 @@ ul#side-menu li.user-pro a small {
 
 .row-stat h1 {
     margin-bottom: 0;
+}
+
+.cards{
+  margin-bottom: 25px;
+}
+
+.cards-header-image {
+  // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }
 
 .row-stat hr {
@@ -1181,6 +1169,25 @@ span.input-group-btn {
     width: 100%;
   }
 
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+/* .material-icons.grey { color: #00000061; } */
+
+.marginPolls{
+  margin: 5px;
+}
 
 
   
