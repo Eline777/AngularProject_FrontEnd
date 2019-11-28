@@ -53,11 +53,11 @@
                                                                   Vrienden uitnodigen
                                                                 </mat-panel-title>
                                                               </mat-expansion-panel-header>
-                                                              <mat-selection-list class="scrollableList" [(ngModel)]="vrienden" (click)="onSelectionChangeMake(make._value)">
+                                                              <mat-selection-list class="scrollableList" #items name="vrienden" [(ngModel)]="vrienden" (click)="onSelectionChangeVriend(vriend)">
                                                                   <!-- <mat-list-option *ngFor="let make of allMakes" [value]="make.make_id">
                                                                     {{make.make_display}} -->
-                                                                    <mat-list-option *ngFor="let make of allMakes" [value]="make.make_id">
-                                                                      {{make.make_display}}
+                                                                    <mat-list-option *ngFor="let vriend of vrienden" [value]="vriend.gebruikerID">
+                                                                      {{vriend.voornaam}} {{vriend.achternaam}}
                                                                   </mat-list-option>
                                                               </mat-selection-list>
                                                             </mat-expansion-panel>

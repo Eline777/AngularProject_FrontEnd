@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
     this.getAantalGebruikers();
     this.getAantalPolls();
     console.log(this.aantalPolls);
+    
    }
 
   ngOnInit() {

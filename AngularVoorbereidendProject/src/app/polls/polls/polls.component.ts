@@ -4,6 +4,8 @@ import { Poll } from '../models/poll.model';
 import { PollGebruiker } from '../models/poll-gebruiker.model';
 import { Antwoord } from '../models/antwoord.model';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import { Gebruiker } from 'src/app/gebruikers/models/gebruiker.model';
+import { VriendenService } from 'src/app/vrienden/vrienden.service';
 
 @Component({
   selector: 'app-polls',
@@ -16,6 +18,7 @@ export class PollsComponent implements OnInit {
   titelPollIsToegevoegd = false;
   antwoorden: string[] = []
 status: string = "";
+vrienden: Gebruiker[] =[];
   //pollForm: FormGroup;
   // antwoorden: FormArray;
   // gebruikers: FormArray;
@@ -38,9 +41,10 @@ status: string = "";
   //      gebruikerID: ['']
   //    })
   //  })
-  constructor(private router: Router, private fb: FormBuilder) { 
+  constructor(private router: Router, private fb: FormBuilder, private _vriendenService: VriendenService) { 
     if(router.url == "/pollMaken"){
       this.isAanmaken = true;
+      this.getVrienden();
     }
     if(router.url == "/stemmen"){
       this.isStemmen = true;
@@ -107,6 +111,12 @@ status: string = "";
      // this.status = "oke";
      this.isOk = true;
     }
-   
+  }
+
+  getVrienden(){
+    this._vriendenService.getVriendenByGebruiker().subscribe(result => {
+      console.log(result);
+      this.vrienden = result;
+    })
   }
 }

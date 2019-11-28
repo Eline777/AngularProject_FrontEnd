@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from 'src/app/security/services/authenticate.service';
 import { Gebruiker } from 'src/app/gebruikers/models/gebruiker.model';
 
+
 @Component({
   selector: 'app-navigatie',
   templateUrl: './navigatie.component.html',

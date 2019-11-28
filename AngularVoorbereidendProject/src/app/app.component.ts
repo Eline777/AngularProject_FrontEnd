@@ -13,10 +13,11 @@ export class AppComponent {
     this._authenticateService.isLoggedin.subscribe(e=> {
       //Do something with the value of this BehaviorSubject
       //Every time the value changes this code will be triggered
+      console.log(e);
       if(e == true){
         this.toonBasisRoutes = false;
       }
-      else{
+      if(e == false){
         this.toonBasisRoutes = true;
       }
       }) 

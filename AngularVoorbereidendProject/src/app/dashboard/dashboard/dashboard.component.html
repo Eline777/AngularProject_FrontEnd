@@ -9,8 +9,8 @@
                         <div class="media-body">
                             <!-- <h3 class="mt5">{{aantalVriendschapverzoeken}}</h3>
                                     <h2 class="mt5">Vriendschapverzoeken</h2> -->
-                            <h1 class="nomargin">{{aantalVriendschapverzoeken}}</h1>
-                            <h5 class="mt5">Vriendschapverzoeken</h5>
+                            <h2 class="nomargin">Vriendschapverzoeken</h2>
+                            <h5 class="mt5"> {{aantalVriendschapverzoeken}} {{tekstVriendschapverzoeken}}</h5>
                         </div><!-- media-body -->
                         <hr>
                         <div class="clearfix mt20">
@@ -33,8 +33,8 @@
                     <div class="panel-heading noborder">
                         <div class="panel-icon"><i class="material-icons md-48">poll</i></div>
                         <div class="media-body">
-                            <h1 class="mt5">{{aantalPollUitnodigingen}}</h1>
-                            <h5 class="mt5">Uitnodigingen polls</h5>
+                            <h2 class="mt5">Uitnodigingen polls</h2>
+                            <h5 class="mt5">{{aantalPollUitnodigingen}}</h5>
                         </div><!-- media-body -->
                         <hr>
                         <div class="clearfix mt20">
@@ -75,22 +75,25 @@
             <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
                 <mat-card>
                     <mat-card-header>
-                        <mat-card-title>Vriendschapsverzoeken</mat-card-title>
-                        <mat-card-subtitle>1 nieuw verzoek</mat-card-subtitle>
+                        <mat-card-title>Vrienden</mat-card-title>
+                        <mat-card-subtitle></mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
-
+                        <ul class="list-group">
+                            <li *ngFor="let vriend of vrienden" >
+                                <span> {{ vriend.voornaam }} {{vriend.achternaam}}  </span>
+                            </li>
+                        </ul>
                     </mat-card-content>
                 </mat-card>
             </div>
         </div>
         <div class="row">
-
             <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
                 <mat-card>
                     <mat-card-header>
-                        <mat-card-title>Vrienden</mat-card-title>
-                        <mat-card-subtitle>10</mat-card-subtitle>
+                        <mat-card-title>Vriendschapsverzoeken</mat-card-title>
+                        <mat-card-subtitle>1 nieuw verzoek</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
 
