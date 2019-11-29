@@ -8,7 +8,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InloggenRegistrerenModule } from './inloggen-registreren/inloggen-registreren.module'
 import { InloggenRegistrerenComponent } from './inloggen-registreren/inloggen-registreren/inloggen-registreren.component'
-import { MatSidenavModule, MatListModule, MatToolbarModule, MatButtonModule } from '@angular/material';
+import { MatSidenavModule, MatListModule, MatToolbarModule, MatButtonModule, MatDialogModule } from '@angular/material';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SecurityModule } from './security/security.module';
@@ -24,6 +24,8 @@ import { NavigatieComponent } from './shared/navigatie/navigatie.component';
 import { SecurityInterceptor } from './security/security.interceptor';
 import { PollsComponent } from './polls/polls/polls.component';
 import { PollsModule } from './polls/polls.module';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { AddVriendComponent } from './vrienden/add-vriend/add-vriend.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     DashboardComponent,
-    UitloggenComponent  
+    UitloggenComponent,
+    AddVriendComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,11 @@ const appRoutes: Routes = [
     AccountActivatieModule,
     GebruikersModule,
     HomeModule,
-    PollsModule
+    PollsModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    AddVriendComponent
   ],
   providers: [
     {

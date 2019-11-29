@@ -31,6 +31,10 @@ export class VriendenService {
     getVriendschapverzoekenByGebruiker(): Observable<Vriendschap[]> {
       var gebruikerID = new Number(localStorage.getItem("gebruikerID")).valueOf();
       return this.http.get<Vriendschap[]>("https://localhost:44399/api/vriendschap/vriendschapverzoeken/" + gebruikerID );
-    
   }
+
+  addVriendschap(vriendschap: Vriendschap) {
+    return this.http.post<Vriendschap>("https://localhost:44399/api/vriendschap", vriendschap);
+    }
+
 }
