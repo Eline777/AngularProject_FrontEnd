@@ -10,6 +10,7 @@ import { Antwoord } from '../models/antwoord.model';
 import { faEdit, faCheck, faTrash, faCheckCircle, faPlusCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { VriendenService } from 'src/app/vrienden/vrienden.service';
 import { PollsService } from '../polls.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-add-poll',
@@ -61,7 +62,7 @@ nieuwePoll: Poll = null;
   }
 
   private handleError(error) {
-    this._messageService.openDialog('Error', 'Er is iets mis gegaan, controleer uw internetconnectie aub.');
+    this._messageService.openDialog('Error', 'Er is iets mis gegaan.');
   }
 
   addNaam(){
@@ -119,6 +120,7 @@ nieuwePoll: Poll = null;
         this.antwoorden = [];
         this.vriendenForm.controls.reset;
         this.titelPoll = ""; this.naam = ""; this.antwoordenPoll = null; // tekstvelden terug leegmaken, zodat de gebruiker een volgende poll kan maken
+        this._pollService.pollIsToegevoegd = new BehaviorSubject(true); // om het dashboard up te daten, zodat de nieuwe poll ook in de lijst staat
        }
      },
      (err: HttpErrorResponse) => {

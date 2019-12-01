@@ -56,6 +56,7 @@ hide = true;
         localStorage.setItem("gebruikerID", result.gebruikerID.toString());
         localStorage.setItem("voornaam", result.voornaam.toString());
         localStorage.setItem("achternaam", result.achternaam.toString());
+        localStorage.setItem('gebruikerObject', JSON.stringify(result));
         this.router.navigate(['/dashboard']);
         });
     }

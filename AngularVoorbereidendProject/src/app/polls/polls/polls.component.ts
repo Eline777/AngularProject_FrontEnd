@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Poll } from '../models/poll.model';
 import { PollGebruiker } from '../models/poll-gebruiker.model';
 import { Antwoord } from '../models/antwoord.model';
 import { FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { Gebruiker } from 'src/app/gebruikers/models/gebruiker.model';
 import { VriendenService } from 'src/app/vrienden/vrienden.service';
+import { PollsService } from '../polls.service';
 
 @Component({
   selector: 'app-polls',
@@ -13,8 +14,6 @@ import { VriendenService } from 'src/app/vrienden/vrienden.service';
   styleUrls: ['./polls.component.scss']
 })
 export class PollsComponent implements OnInit {
-  isAanmaken: Boolean = false;
-  isStemmen: Boolean = false;
   titelPollIsToegevoegd = false;
   antwoorden: string[] = []
 status: string = "";
@@ -26,11 +25,13 @@ vrienden: Gebruiker[] =[];
    antwoord: string = '';
    titelPoll: string = "";
    isOk: boolean = false;
-   //aantalAntwoorden: number;
+  
    naam: string = "";
    gebruikersPoll: PollGebruiker[];
    antwoordenPoll : Antwoord[];
-   nieuwePoll: Poll = new Poll(null, "",new Number(localStorage.getItem("gebruikerID")).valueOf(), this.antwoordenPoll, this.gebruikersPoll);
+   //nieuwePoll: Poll = new Poll(null, "",new Number(localStorage.getItem("gebruikerID")).valueOf(), this.antwoordenPoll, this.gebruikersPoll);
+  
+ 
   //  pollForm = this.fb.group({
   //    naam: [''],
   //    makerID: localStorage.getItem("gebruikerID"),
@@ -41,82 +42,32 @@ vrienden: Gebruiker[] =[];
   //      gebruikerID: ['']
   //    })
   //  })
-  constructor(private router: Router, private fb: FormBuilder, private _vriendenService: VriendenService) { 
-    if(router.url == "/pollMaken"){
-      this.isAanmaken = true;
-      this.getVrienden();
-    }
-    if(router.url == "/stemmen"){
-      this.isStemmen = true;
-    }
-  }
-
-  ngOnInit() {
-    // this.itemsForm = this.fb.group({
-    //   naam: '',
-    //   antwoord: '',
-    //   //gebruikersPoll: this.fb.array([this.maakGebruiker()])
-    // })
-
-  //   this.pollForm = this.fb.group({
-  //     naam: '',
-  //     makerID: localStorage.getItem("gebruikerID"),
-  //     antwoorden: this.fb.array([this.maakAntwoord()]),
-  //    // gebruikersPoll: this.fb.array([this.maakGebruiker()])
-  //   })
-   }
-
-  // maakAntwoord(): FormGroup {
-  //   return this.fb.group({
-  //     antwoord: ''
-  //   });
-  // }
-
-  // maakGebruiker(): FormGroup {
-  //   return this.fb.group({
-  //     gebruikerID: ''
-  //   });
-  // }
-
-  // addTitel(): void{
-  //   this.pollForm.controls.naam.setValue(this.titelPoll);
-  //  // this.titelPoll = naam;
-  // }
-
-  // addAntwoord(): void {
-  //   this.antwoorden = this.pollForm.get('antwoorden') as FormArray;
-  //   this.antwoorden.push(this.maakAntwoord());
-  // }
-
-  // addGebruiker(): void {
-  //   this.gebruikers = this.pollForm.get('gebruikers') as FormArray;
-  //   this.gebruikers.push(this.maakGebruiker());
-  // }
-  addNaam(){
-    //this.pollForm.controls.naam.setValue(this.titelPoll);
-    this.nieuwePoll.naam = this.naam;
-    this.titelPoll = this.naam;
-    console.log(this.titelPoll);
-    console.log(this.nieuwePoll);
-   // console.log(this.pollForm.controls.naam.value);
-    this.titelPollIsToegevoegd = true;
-    console.log(this.titelPoll);
-  }
-
-  addAntwoord(): void {
-    this.antwoorden.push(this.antwoord);
-    console.log(this.antwoorden);
-    this.antwoord = "";
-    if(this.antwoorden.length >= 2){
-     // this.status = "oke";
-     this.isOk = true;
-    }
-  }
-
-  getVrienden(){
-    this._vriendenService.getVriendenByGebruiker().subscribe(result => {
+  poll: Poll = new Poll(0, "", 0, [], []);
+  pollID: number = 0;
+  constructor(private activatedRoute:ActivatedRoute, private fb: FormBuilder, private _pollsService: PollsService) { 
+    activatedRoute.paramMap.subscribe(result => {
       console.log(result);
-      this.vrienden = result;
+      this.pollID =  new Number(result.get('pollID')).valueOf(); ;
+      console.log(this.pollID);
+      this.getPoll(this.pollID);
+      
+    })
+
+    var pollObject = localStorage.getItem('pollObject');
+    this.poll =  JSON.parse(pollObject);
+    console.log(this.poll);
+  }
+
+  ngOnInit() { }
+
+  getPoll(pollID: number){
+      this._pollsService.getPoll(pollID).subscribe(result => {
+      console.log(result);
+      this.poll = result;
+     // this.aantalVrienden = result.length;
     })
   }
+ 
+
+  
 }

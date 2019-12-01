@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatSidenavModule, MatIconModule, MatExpansionModule, MatListModule, MatOptionModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatSidenavModule, MatIconModule, MatExpansionModule, MatListModule, MatOptionModule, MatRadioModule } from '@angular/material';
 import { NavigatieComponent } from './navigatie/navigatie.component';
 import { GebruikerService } from '../gebruikers/gebruiker.service';
 import { ModuleWithProviders } from '@angular/core';
@@ -31,7 +31,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatListModule,
     MatOptionModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatRadioModule
   ],
   exports: [
     MatInputModule,
@@ -46,7 +47,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatExpansionModule,
     MatListModule,
     MatOptionModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatRadioModule
     // DialogComponent,
     // DialogService,
    // VriendenModule

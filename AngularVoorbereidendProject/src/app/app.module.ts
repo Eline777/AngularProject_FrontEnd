@@ -28,8 +28,10 @@ import { MessagesService } from './shared/message-service/message.service';
 import { MessageComponent } from './shared/message-service/message/message.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { AddPollComponent } from './polls/add-poll/add-poll.component';
-import { faEdit, faCheckSquare, faCheck, faCheckCircle, faTrash, faPlus, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faCheckSquare, faCheck, faCheckCircle, faTrash, faPlus, faPlusCircle, faPoll, faPollH } from '@fortawesome/free-solid-svg-icons';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { VriendenComponent } from './vrienden/vrienden/vrienden.component';
+import { VriendenModule } from './vrienden/vrienden.module';
 
 
 const appRoutes: Routes = [
@@ -40,8 +42,9 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'activeren/:activatiecode', component: AccountActivatieComponent },
   { path: 'uitloggen', component: UitloggenComponent },
-  { path: 'polls', component: PollsComponent },
-  { path: 'pollMaken', component: PollsComponent }
+  { path: 'polls/:pollID', component: PollsComponent },
+  { path: 'pollMaken', component: PollsComponent },
+  { path: 'vrienden', component: VriendenComponent }
 
   ];
 
@@ -73,7 +76,8 @@ const appRoutes: Routes = [
     PollsModule,
     MatDialogModule,
     FontAwesomeModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    VriendenModule
   ],
   entryComponents: [
     AddVriendComponent,
@@ -93,6 +97,6 @@ const appRoutes: Routes = [
 })
 export class AppModule { 
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faEdit, faCheckSquare, faCheck, faCheckCircle, faTrash, faPlus, faPlusCircle);
+    library.addIcons(faEdit, faCheckSquare, faCheck, faCheckCircle, faTrash, faPlus, faPlusCircle, faPoll, faPollH);
   }
 }
