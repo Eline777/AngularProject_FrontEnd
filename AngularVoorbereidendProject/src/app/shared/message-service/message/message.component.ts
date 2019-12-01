@@ -18,7 +18,7 @@ export class MessageComponent implements OnInit {
     private closeWithTimer() {
       setTimeout (() => {
         this.dialogRef.close();
-      }, 2000);
+      }, 4000);
     }
   
   

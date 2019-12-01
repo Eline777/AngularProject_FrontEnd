@@ -1,0 +1,394 @@
+<!-- <mat-card-content>
+    <form [formGroup]="nieuwePollForm" (ngSubmit)="onSubmit()">
+        <h1 mat-dialog-title>Poll aanmaken</h1>
+        <div mat-dialog-content>
+            <p>Vul hier het emailadres in van de vriend die je wil toevoegen.<br>
+                * Wanneer deze persoon nog geen account heeft zal deze een mail ontvangen om zich te registreren. <br>
+            </p> 
+            <mat-form-field>
+                <div class="input-group">
+                        <input matInput type="text" class="form-control" placeholder="naam" formControlName="naam"
+                        [(ngModel)]="naam" class="marginPolls" [readonly]="isReadonly" />
+                    <span>
+                        <button mat-raised-button color="primary" (click)="addNaam()">
+                            <i class="material-icons marginPolls">done</i>
+                            <fa-icon [icon]="faCheck"></fa-icon>
+                        </button>
+                    </span>
+                    
+                    <button ><i
+                            class="material-icons">add</i></button> 
+                </div>
+            </mat-form-field>
+        </div>
+    </form>
+    <div mat-dialog-actions fxLayoutAlign="space-around center">
+        <button mat-dialog-close md-raised-button color="primary" (click)="dialogRef.close()">Sluiten</button>
+    </div>
+</mat-card-content> -->
+
+<mat-card-content>
+    <!-- <form [formGroup]="nieuwePollForm" (ngSubmit)="onSubmit()"> -->
+    <!-- <h1 mat-dialog-title>Poll aanmaken</h1> -->
+    <div mat-dialog-content>
+        <!-- <div class="row"> -->
+        <!-- <div class="bs col-lg-4"> -->
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Poll maken</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="bs col-lg-5">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="naam" name="titel" [(ngModel)]="naam"
+                                class="marginPolls" [readonly]="isReadonly" />
+                            <span>
+                                <button mat-mini-fab color="primary" (click)="addNaam()">
+                                    <fa-icon [icon]="faCheckCircle"></fa-icon>
+                                </button>
+                            </span>
+                        </div>
+                        <div *ngIf="titelPollIsToegevoegd">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="antwoord" name="antwoord"
+                                    [(ngModel)]="antwoord" class="marginPolls" />
+                                <button mat-mini-fab color="primary" (click)="addAntwoord()">
+                                    <fa-icon [icon]="faCheckCircle"></fa-icon>
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bs col-lg-7">
+                        <form #pollForm="ngForm" (ngSubmit)="toonCardVrienden()">
+                            <!-- <p>{{ nieuwePoll | json}}</p> -->
+                            <div class="input-container">
+                                <h3>{{titelPoll}}</h3>
+                                <div class="row">
+                                    <ul>
+                                        <li *ngFor="let antwoord of antwoorden">
+                                            <span> {{ antwoord }} </span>
+                                            <button mat-icon-button color="warn" (click)="deleteAntwoord(antwoord)">
+                                                <fa-icon [icon]="faTrash"></fa-icon>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div *ngIf="aantalAntwoordenIsOk">
+                                        <button mat-raised-button color="primary" type="submit"
+                                            [disabled]="!pollForm.valid || submitted">Vrienden uitnodigen</button>
+                                    </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card *ngIf="toonVrienden">
+            <mat-card-header>
+                    <mat-card-title>Vrienden uitnodigen</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <form [formGroup]="vriendenForm">
+                        <div class="row">
+                                <div class="bs col-lg-5">
+                                        <!-- <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="emailadres vriend" name="email" [(ngModel)]="mailadres"
+                                                    class="marginPolls"  />
+                                                <span>
+                                                    <button mat-mini-fab color="primary" (click)="addEmailVriend">
+                                                        <fa-icon [icon]="faPlus"></fa-icon>
+                                                    </button>
+                                                </span>
+                                            </div> -->
+                                            <mat-accordion>
+                                                    <mat-expansion-panel>
+                                                        <mat-expansion-panel-header>
+                                                            <mat-panel-title>
+                                                                Vrienden uitnodigen
+                                                            </mat-panel-title>
+                                                        </mat-expansion-panel-header>
+                                                        <mat-selection-list class="scrollableList" #items formControlName="vrienden"
+                                                            (click)="onSelectionChangeVriend(vrienden)">
+                                                            <mat-list-option *ngFor="let vriend of alleVrienden"
+                                                                [value]="vriend.gebruikerID">
+                                                                {{vriend.voornaam}} {{vriend.achternaam}}
+                                                            </mat-list-option>
+                                                        </mat-selection-list>
+                                                    </mat-expansion-panel>
+                                                </mat-accordion>
+                                </div>
+                                <div class="bs col-lg-7">
+                                        <!-- <form #VriendenForm="ngForm"> -->
+                                                <!-- <p>{{ nieuwePoll | json}}</p> -->
+                                                <div class="input-container">
+                                                    <!-- <h3>Vrienden</h3> -->
+                                                    <div class="row">
+                                                            <mat-list class="scrollableList">
+                                                                    <mat-list-item *ngFor="let vriend of vrienden" value="vriend.gebruikerID">
+                                                                            <span> {{vriend.voornaam}} {{vriend.achternaam}} </span>
+                                                                            <button mat-icon-button color="warn" (click)="deleteVriend(vriend)">
+                                                                                <fa-icon [icon]="faTrash"></fa-icon>
+                                                                            </button>
+                                                                      
+                                                                      <!-- <mat-icon matListIcon>folder</mat-icon> -->
+                                                                    </mat-list-item>
+                                                                  </mat-list>
+
+                                                        <!-- <ul>
+                                                            <li *ngFor="let vriend of vrienden">
+                                                                <span> {{vriend.voornaam}} {{vriend.achternaam}} </span>
+                                                                <button mat-icon-button color="warn" (click)="deleteVriend(vriend)">
+                                                                    <fa-icon [icon]="faTrash"></fa-icon>
+                                                                </button>
+                                                            </li>
+                                                        </ul> -->
+                                                    </div>
+                                                </div>
+                                            <!-- </form> -->
+                                </div>
+                        </div>
+                </form>
+              
+
+                <!-- <div class="input-group">
+                            <input type="text" class="form-control" placeholder="naam" name="titel" [(ngModel)]="naam"
+                                class="marginPolls" [readonly]="isReadonly" />
+                            <span>
+                                <button mat-raised-button color="primary" (click)="addNaam()">
+                                     <i class="material-icons marginPolls">done</i> 
+                                    <fa-icon [icon]="faEdit"></fa-icon>
+                                </button>
+                            </span>
+                        </div>
+                        <div *ngIf="titelPollIsToegevoegd">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="antwoord" name="antwoord"
+                                    [(ngModel)]="antwoord" class="marginPolls" />
+                                <button mat-raised-button color="primary" (click)="addAntwoord()"><i
+                                        class="material-icons">add</i></button>
+                            </div>
+                        </div> -->
+            </mat-card-content>
+        </mat-card>
+        <!-- </div> -->
+        <!-- <div class="bs col-lg-8">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Overzicht</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <form #pollForm="ngForm" (ngSubmit)="onSubmit()">
+                            <p>{{ nieuwePoll | json}}</p>
+                            <div class="input-container">
+                                <h3>{{titelPoll}}</h3>
+                                <div class="row">
+                                    <ul class="list-group">
+                                        <li *ngFor="let antwoord of antwoorden">
+                                            <span> {{ antwoord }} </span>
+                                        </li>
+                                    </ul>
+                                </div> -->
+
+        <!-- <mat-accordion>
+                                    <mat-expansion-panel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Vrienden uitnodigen
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <mat-selection-list class="scrollableList" #items name="vrienden"
+                                            [(ngModel)]="vrienden" (click)="onSelectionChangeVriend(vriend)">
+                                            <mat-list-option *ngFor="let vriend of vrienden"
+                                                [value]="vriend.gebruikerID">
+                                                {{vriend.voornaam}} {{vriend.achternaam}}
+                                            </mat-list-option>
+                                        </mat-selection-list>
+                                    </mat-expansion-panel>
+                                </mat-accordion> -->
+
+        <!-- <div *ngIf="isOk">
+                                    <button mat-raised-button color="primary" type="submit"
+                                        [disabled]="!pollForm.valid || submitted">Opslaan</button>
+                                </div> -->
+        <!-- </div>
+                        </form>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div mat-dialog-actions fxLayoutAlign="space-around center">
+            <button mat-dialog-close md-raised-button color="primary" (click)="dialogRef.close()">Sluiten</button>
+        </div>-->
+    </div>
+
+</mat-card-content>
+
+
+
+
+
+
+<!-- <mat-card-content>
+    <h1 mat-dialog-title>Poll aanmaken</h1>
+    <div mat-dialog-content>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="naam" name="titel" [(ngModel)]="naam"
+                class="marginPolls" [readonly]="isReadonly" />
+            <span>
+                <button mat-raised-button color="primary" (click)="addNaam()">
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+            </span>
+        </div>
+        <div *ngIf="titelPollIsToegevoegd">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="antwoord" name="antwoord" [(ngModel)]="antwoord"
+                    class="marginPolls" />
+                <button mat-raised-button color="primary" (click)="addAntwoord()"><i
+                        class="material-icons">add</i></button>
+            </div>
+        </div>
+        <div>
+            <form #pollForm="ngForm" (ngSubmit)="onSubmit()">
+                <p>{{ nieuwePoll | json}}</p>
+                <div class="input-container">
+                    <h3>{{titelPoll}}</h3>
+                    <div class="row">
+                        <ul class="list-group">
+                            <li *ngFor="let antwoord of antwoorden">
+                                <span> {{ antwoord }} </span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <mat-accordion>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Vrienden uitnodigen
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-selection-list class="scrollableList" #items name="vrienden" [(ngModel)]="vrienden"
+                                (click)="onSelectionChangeVriend(vriend)">
+                                <mat-list-option *ngFor="let vriend of vrienden" [value]="vriend.gebruikerID">
+                                    {{vriend.voornaam}} {{vriend.achternaam}}
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                    <div *ngIf="isOk">
+                        <button mat-raised-button color="primary" type="submit"
+                            [disabled]="!pollForm.valid || submitted">Opslaan</button>
+                    </div>
+                </div>
+            </form>
+        </div> -->
+
+
+<!-- <div class="input-group">
+                        <input matInput type="text" class="form-control" placeholder="naam" formControlName="naam"
+                        [(ngModel)]="naam" class="marginPolls" [readonly]="isReadonly" />
+                    <span>
+                        <button mat-raised-button color="primary" (click)="addNaam()">
+                            <i class="material-icons marginPolls">done</i>
+                            <fa-icon [icon]="faCheck"></fa-icon>
+                        </button>
+                    </span>
+                    
+                    <button ><i
+                            class="material-icons">add</i></button> 
+                </div> -->
+<!-- </mat-form-field> 
+        </div>
+    </form> 
+    <div mat-dialog-actions fxLayoutAlign="space-around center">
+        <button mat-dialog-close md-raised-button color="primary" (click)="dialogRef.close()">Sluiten</button>
+    </div>
+</mat-card-content>-->
+
+
+
+
+<!-- <div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row row-stat">
+            <div class="col-sm-12">
+                <div class="panel panel-default " >
+                    <div class="panel-heading panel-heading-divider">Poll aanmaken</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="naam" name="titel"
+                                        [(ngModel)]="naam" class="marginPolls" [readonly]="isReadonly" />
+                                    <span>
+                                        <button mat-raised-button color="primary" (click)="addNaam()">
+                                             <i class="material-icons marginPolls">done</i> 
+                                            <fa-icon [icon]="faEdit"></fa-icon>
+                                        </button>
+                                    </span>
+                                </div>
+                                <div *ngIf="titelPollIsToegevoegd">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="antwoord" name="antwoord"
+                                            [(ngModel)]="antwoord" class="marginPolls" />
+                                        <button mat-raised-button color="primary" (click)="addAntwoord()"><i
+                                                class="material-icons">add</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <form #pollForm="ngForm" (ngSubmit)="onSubmit()">
+                                    <p>{{ nieuwePoll | json}}</p>
+                                    <div class="input-container">
+                                        <!-- <mat-form-field> -->
+<!-- <h3>{{titelPoll}}</h3> -->
+<!-- </mat-form-field>  -->
+<!-- <mat-form-field> -->
+<!-- <div class="row">
+                                            <ul class="list-group">
+                                                <li *ngFor="let antwoord of antwoorden">
+                                                    <span> {{ antwoord }} </span>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+
+<!-- </mat-form-field>  -->
+<!-- <mat-checkbox [(ngModel)]="checkbox" required>Heeft poll 2 of meerdere keuzemogelijkheden</mat-checkbox> -->
+<!-- <mat-form-field><input matInput type="text" [(ngModel)]="status" required
+                                                    minlength="2" name="status"></mat-form-field> -->
+<!-- <mat-accordion>
+                                            <mat-expansion-panel>
+                                                <mat-expansion-panel-header>
+                                                    <mat-panel-title>
+                                                        Vrienden uitnodigen
+                                                    </mat-panel-title>
+                                                </mat-expansion-panel-header>
+                                                <mat-selection-list class="scrollableList" #items name="vrienden"
+                                                    [(ngModel)]="vrienden" (click)="onSelectionChangeVriend(vriend)">
+                                                     <mat-list-option *ngFor="let make of allMakes" [value]="make.make_id">
+                                                                    {{make.make_display}} 
+                                                    <mat-list-option *ngFor="let vriend of vrienden"
+                                                        [value]="vriend.gebruikerID">
+                                                        {{vriend.voornaam}} {{vriend.achternaam}}
+                                                    </mat-list-option>
+                                                </mat-selection-list>
+                                            </mat-expansion-panel>
+                                        </mat-accordion>
+
+                                        <div *ngIf="isOk">
+                                            <button mat-raised-button color="primary" type="submit"
+                                                [disabled]="!pollForm.valid || submitted">Opslaan</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->

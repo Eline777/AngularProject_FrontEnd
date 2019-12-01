@@ -5,19 +5,15 @@
             <p>Vul hier het emailadres in van de vriend die je wil toevoegen.<br>
                 * Wanneer deze persoon nog geen account heeft zal deze een mail ontvangen om zich te registreren. <br>
             </p>
-            <mat-form-field >
-                    <div class="input-group">
-                            <input matInput formControlName="email"  type="email" class="form-control" placeholder="email"
-                            />
-                         <button mat-raised-button color="primary" (click)="addVriend()" [disabled]="!vriendForm.valid"><i
-                                  class="material-icons">add</i></button>
-                    </div>
-                
+            <mat-form-field>
+                <div class="input-group">
+                    <input matInput formControlName="email" type="email" class="form-control" placeholder="email" />
+                    <button mat-raised-button color="primary" (click)="addVriend()" [disabled]="!vriendForm.valid"><i
+                            class="material-icons">add</i></button>
+                </div>
             </mat-form-field>
         </div>
-        <!-- <button [disabled]="!vriendForm.valid" mat-raised-button>Verstuur</button> -->
     </form>
-
     <div mat-dialog-actions fxLayoutAlign="space-around center">
         <button mat-dialog-close md-raised-button color="primary" (click)="dialogRef.close()">Sluiten</button>
     </div>

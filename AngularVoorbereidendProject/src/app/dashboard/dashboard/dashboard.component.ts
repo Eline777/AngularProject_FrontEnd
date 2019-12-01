@@ -6,6 +6,7 @@ import { Vriendschap } from 'src/app/vrienden/models/vriendschap.model';
 import { Gebruiker } from 'src/app/gebruikers/models/gebruiker.model';
 import { AddVriendComponent } from 'src/app/vrienden/add-vriend/add-vriend.component';
 import { MatDialog } from '@angular/material';
+import { AddPollComponent } from 'src/app/polls/add-poll/add-poll.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,7 @@ import { MatDialog } from '@angular/material';
 })
 export class DashboardComponent implements OnInit {
   private addVriendComponent = AddVriendComponent;
+  private addPollComponent = AddPollComponent;
   tekstVriendschapverzoeken : string = "";
   tekstPollUitnodigingen : string = "";
   aantalVriendschapverzoeken: number = 0;
@@ -23,12 +25,13 @@ export class DashboardComponent implements OnInit {
   aantalVrienden : number = 0;
   aantalPolls: number = 0;
   constructor(private _authenticateService : AuthenticateService, private _vriendenService: VriendenService, public dialog: MatDialog) {
-    this.getAantalVriendschapverzoeken();
-    this.getVrienden();
+   
     this._authenticateService.isLoggedin.subscribe(e=> {
       //Do something with the value of this BehaviorSubject
       //Every time the value changes this code will be triggered
      // this.getAantalVriendschapverzoeken();
+     this.getAantalVriendschapverzoeken();
+     this.getVrienden();
       })
    }
 
@@ -58,6 +61,10 @@ getVrienden(){
 
 public addVriend() {
   this.dialog.open(this.addVriendComponent);
+}
+
+public addPoll() {
+  this.dialog.open(this.addPollComponent, {width: '50%', height: '50%', panelClass: 'custom-modalbox'});
 }
 
 }

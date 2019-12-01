@@ -34,7 +34,6 @@ export class VriendenService {
   }
 
   addVriendschap(vriendschap: Vriendschap) {
-    return this.http.post<Vriendschap>("https://localhost:44399/api/vriendschap", vriendschap);
+    return this.http.post<any>("https://localhost:44399/api/vriendschap", vriendschap);
     }
-
 }

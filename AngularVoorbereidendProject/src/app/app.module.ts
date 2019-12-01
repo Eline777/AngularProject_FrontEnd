@@ -17,21 +17,27 @@ import { AccountActivatieModule } from './account-activatie/account-activatie.mo
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { AuthGuard } from './security/guards/auth.guard';
 import { GebruikersModule } from './gebruikers/gebruikers.module';
-import { GebruikerService } from './gebruikers/gebruiker.service';
 import { HomeModule } from './home/home.module';
 import { UitloggenComponent } from './uitloggen/uitloggen/uitloggen.component';
-import { NavigatieComponent } from './shared/navigatie/navigatie.component';
 import { SecurityInterceptor } from './security/security.interceptor';
 import { PollsComponent } from './polls/polls/polls.component';
 import { PollsModule } from './polls/polls.module';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { AddVriendComponent } from './vrienden/add-vriend/add-vriend.component';
+import { MessagesService } from './shared/message-service/message.service';
+import { MessageComponent } from './shared/message-service/message/message.component';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { AddPollComponent } from './polls/add-poll/add-poll.component';
+import { faEdit, faCheckSquare, faCheck, faCheckCircle, faTrash, faPlus, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'inloggen', component: InloggenRegistrerenComponent },
   { path: 'registreren', component: InloggenRegistrerenComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  // { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'activeren/:activatiecode', component: AccountActivatieComponent },
   { path: 'uitloggen', component: UitloggenComponent },
   { path: 'polls', component: PollsComponent },
@@ -45,7 +51,7 @@ const appRoutes: Routes = [
     HomeComponent,
     DashboardComponent,
     UitloggenComponent,
-    AddVriendComponent
+    AddVriendComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,12 +71,18 @@ const appRoutes: Routes = [
     GebruikersModule,
     HomeModule,
     PollsModule,
-    MatDialogModule
+    MatDialogModule,
+    FontAwesomeModule,
+    FlexLayoutModule
   ],
   entryComponents: [
-    AddVriendComponent
+    AddVriendComponent,
+    AddPollComponent,
+    MessageComponent,
   ],
   providers: [
+    MessagesService,
+    {provide: MatDialogRef},
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SecurityInterceptor,
@@ -79,4 +91,8 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faEdit, faCheckSquare, faCheck, faCheckCircle, faTrash, faPlus, faPlusCircle);
+  }
+}

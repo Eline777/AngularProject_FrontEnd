@@ -10,12 +10,13 @@ import { AuthenticateService } from '../security/services/authenticate.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { VriendenService } from '../vrienden/vrienden.service';
 import { MessageComponent } from './message-service/message/message.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //import { DialogComponent } from './dialog/dialog/dialog.component';
 //import { DialogService } from './dialog/dialog.service';
 //import { VriendenModule } from '../vrienden/vrienden.module';
 
 @NgModule({
-  declarations: [NavigatieComponent, MessageComponent],
+  declarations: [NavigatieComponent, MessageComponent,],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -29,7 +30,8 @@ import { MessageComponent } from './message-service/message/message.component';
     MatExpansionModule,
     MatListModule,
     MatOptionModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule
   ],
   exports: [
     MatInputModule,
@@ -44,6 +46,7 @@ import { MessageComponent } from './message-service/message/message.component';
     MatExpansionModule,
     MatListModule,
     MatOptionModule,
+    FontAwesomeModule
     // DialogComponent,
     // DialogService,
    // VriendenModule
