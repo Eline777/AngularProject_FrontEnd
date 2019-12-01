@@ -64,7 +64,7 @@ public addVriend() {
 }
 
 public addPoll() {
-  this.dialog.open(this.addPollComponent, {width: '50%', height: '50%', panelClass: 'custom-modalbox'});
+  this.dialog.open(this.addPollComponent, {width: '50%', height: '70%', panelClass: 'custom-modalbox'});
 }
 
 }

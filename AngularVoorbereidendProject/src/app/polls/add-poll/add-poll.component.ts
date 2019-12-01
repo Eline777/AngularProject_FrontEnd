@@ -9,6 +9,7 @@ import { PollGebruiker } from '../models/poll-gebruiker.model';
 import { Antwoord } from '../models/antwoord.model';
 import { faEdit, faCheck, faTrash, faCheckCircle, faPlusCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { VriendenService } from 'src/app/vrienden/vrienden.service';
+import { PollsService } from '../polls.service';
 
 @Component({
   selector: 'app-add-poll',
@@ -16,46 +17,21 @@ import { VriendenService } from 'src/app/vrienden/vrienden.service';
   styleUrls: ['./add-poll.component.scss']
 })
 export class AddPollComponent {
-  isAanmaken: Boolean = false;
-  isStemmen: Boolean = false;
   titelPollIsToegevoegd = false;
   antwoorden: string[] = []
-status: string = "";
   vriendenPoll: Gebruiker[] = [];
- // mailadressenVrienden : string[] = [];
- // mailadres: string = "";
    antwoord: string = '';
    titelPoll: string = "";
    aantalAntwoordenIsOk: boolean = false; // Er moeten minsten twee antwoorden bij een poll zijn
    toonVrienden: boolean = false; // wanneer de naam en aantal antwoorden van de poll in orde zijn kan de gebruiker vrienden uitnodigen om te stemmen
    aantalVriendenIsOk: boolean = false; // Er moet minsten één vriend zijn die kan stemmen
    naam: string = "";
-   gebruikersPoll: PollGebruiker[];
-   antwoordenPoll : Antwoord[];
-   nieuwePoll: Poll = new Poll(null, "",new Number(localStorage.getItem("gebruikerID")).valueOf(), this.antwoordenPoll, this.gebruikersPoll);
+   gebruikersPoll: PollGebruiker[] = [];
+   antwoordenPoll : Antwoord[] = [];
+nieuwePoll: Poll = null;
 
-
-
-
-//   titelPollIsToegevoegd = false;
-//   antwoorden: string[] = []
-// status: string = "";
-vrienden: Gebruiker[] = [];
  alleVrienden: Gebruiker[] = [];
-//    antwoord: string = '';
-//    titelPoll: string = "";
-//    isOk: boolean = false;
-//    naam: string = "";
-//    gebruikersPoll: PollGebruiker[];
-//    antwoordenPoll : Antwoord[];
-  // nieuwePoll: Poll = new Poll(null, "",new Number(localStorage.getItem("gebruikerID")).valueOf(), this.antwoordenPoll, this.gebruikersPoll);
-  nieuwePollForm = this.fb.group({
-    naam: ['', Validators.required],
-    lijstMogelijkeAntwoorden: [this.antwoordenPoll, Validators.required],
-    lijstGebruikersPoll: [this.gebruikersPoll, Validators.required]
 
-  });
-   //isReadonly = false;
    iconNaamPoll: string = "done";
    faEdit = faEdit;
    faCheck = faCheck;
@@ -63,110 +39,43 @@ vrienden: Gebruiker[] = [];
    faCheckCircle = faCheckCircle;
    faPlus = faPlus;
    faPlusCircle = faPlusCircle;
-  
-  // @ViewChild(AddEditFormComponent)
-  // public addMemberForm: AddEditFormComponent;
+
   vriendenForm = this.fb.group({
-    // selectListVrienden: [Gebruiker],
-    vrienden: [Gebruiker],
-    vriendenVoorPoll: [Gebruiker]
+    vrienden: [[''], Validators.required]
   });
 
   constructor(
     private fb: FormBuilder,
-   // private httpService: HttpService,
     public dialogRef: MatDialogRef<AddPollComponent>,  // Used by the html component.
     private _vriendenService: VriendenService,
-    private _messageService: MessagesService
-    //public formErrorsService: FormErrorsService
-  ) {
-    this.getVrienden();
+    private _messageService: MessagesService,
+    private _pollService: PollsService
+  ) {}
+
+   ngOnInit(){
+     this.getVrienden();
    }
 
-
-  // reset() {
-  //   this.addMemberForm.addEditMemberForm.reset();
-  // }
-
-  //  Processes form data and sends it to the server and db.
-
-  public save(addMemberForm) {
-
-    // right before we submit our form to the server we check if the form is valid
-    // if not, we pass the form to the validateform function again. Now with check dirty false
-    // this means we check every form field independent of whether it's touched.
-
-    // if (this.addMemberForm.addEditMemberForm.valid) {
-
-    // const enteredData = this.addMemberForm.addEditMemberForm.value;
-
-    // this.httpService.addRecord(this.membersUrl, enteredData)
-    //   .subscribe(
-    //     res => {
-    //       this.success();
-    //     },
-    //     (err: HttpErrorResponse) => {
-    //       console.log(err.error);
-    //       console.log(err.message);
-    //       this.handleError(err);
-    //     }
-    //   );
-    // } else {
-    //   this.addMemberForm.formErrors = this.formErrorsService.validateForm(
-    //     this.addMemberForm.addEditMemberForm,
-    //     this.addMemberForm.formErrors, false
-    //   );
-    // }
-    // addMemberForm.addEditMemberForm.reset();
-  }
-
   private success() {
-    this._messageService.openDialog('Succes', 'De email is verzonden');
+    this._messageService.openDialog('Succes', 'De poll is aangemaakt en uw vrienden zijn uitgenodigd om te stemmen.');
   }
 
   private handleError(error) {
     this._messageService.openDialog('Error', 'Er is iets mis gegaan, controleer uw internetconnectie aub.');
   }
 
-  // addVriend(){
-  //   var huidigeGebruikerID = new Number(localStorage.getItem("gebruikerID")).valueOf();
-  //   this.nieuweVriendschap = new Vriendschap(0, 0, 0, huidigeGebruikerID, this.vriendForm.controls['email'].value);
-  //   console.log(this.nieuweVriendschap);
-  //   this._vriendenService.addVriendschap(this.nieuweVriendschap).subscribe(result => {
-  //    console.log(result);
-  //    console.log(result.statusCode);
-  //    if(result.statusCode == 202){ // status 202 = "Your message is both valid, and queued to be delivered." --> dus wanneer dit OK is krijgt de gebruiker de succesmelding te zien
-  //     this.success();
-  //     this.vriendForm.controls['email'].setValue(""); // tekstveld terug leegmaken, zodat de gebruiker sneller een volgend emailadres kan ingeven
-  //    }
-    
-  //  },
-  //  (err: HttpErrorResponse) => {
-  //    console.log(err.error);
-  //    console.log(err.message);
-  //    this.handleError(err);
-  //  });
-  // }
-
   addNaam(){
-    //this.pollForm.controls.naam.setValue(this.titelPoll);
-    this.nieuwePoll.naam = this.naam;
     this.titelPoll = this.naam;
     console.log(this.titelPoll);
-   // console.log(this.nieuwePoll);
-   // console.log(this.pollForm.controls.naam.value);
     this.titelPollIsToegevoegd = true;
     console.log(this.titelPoll);
-    //this.toggleReadonly();
-   // this.iconNaamPoll = 
   }
 
   addAntwoord(): void {
     this.antwoorden.push(this.antwoord);
     console.log(this.antwoorden);
     this.antwoord = "";
-    if(this.antwoorden.length >= 2){
-     // this.status = "oke";
+    if(this.antwoorden.length >= 2){ // minstens twee antwoorden nodig om een poll te maken
      this.aantalAntwoordenIsOk = true;
     }
   }
@@ -175,19 +84,12 @@ vrienden: Gebruiker[] = [];
     this.toonVrienden = true;
   }
 
-  // addEmailVriend(): void {
-  //   this.mailadressenVrienden.push(this.mailadres);
-  //   console.log(this.mailadressenVrienden);
-  //   this.mailadres = "";
-  //   if(this.mailadressenVrienden.length >= 1){
-  //    // this.status = "oke";
-  //    this.aantalVriendenIsOk = true;
-  //   }
-  // }
-
   onSelectionChangeVriend(geselecteerdeVrienden: Gebruiker[]){
     this.vriendenPoll = geselecteerdeVrienden;
     console.log(this.vriendenPoll);
+    if(this.vriendenPoll.length >= 1){ // minstens 1 vriend uitnodigen om te stemmen
+      this.aantalVriendenIsOk = true;
+     }
   }
 
   getVrienden(){
@@ -197,23 +99,34 @@ vrienden: Gebruiker[] = [];
     })
   }
 
-  // toggleReadonly() {
-  //   this.isReadonly = !this.isReadonly;
-  // }
-
-  onSubmit(){
-
+  addPoll(){
+    for (let item of this.antwoorden){
+      var antwoord = new Antwoord(0, item, 0, null);
+     this.antwoordenPoll.push(antwoord);
+    }
+    for (let vriend of this.vriendenPoll){
+      var pollGebruiker = new PollGebruiker(0, 0, vriend.gebruikerID, false);
+      this.gebruikersPoll.push(pollGebruiker);
+    }
+    this.nieuwePoll = new Poll(0, this.titelPoll, new Number(localStorage.getItem("gebruikerID")).valueOf(), this.antwoordenPoll, this.gebruikersPoll);
+    
+    console.log(this.nieuwePoll);
+      this._pollService.addPoll(this.nieuwePoll).subscribe(result => {
+       console.log(result);
+       if(result != null){ // wanneer poll is aangemaakt wordt een succesboodschap getoond
+        this.success();
+        this.vriendenPoll = [];
+        this.antwoorden = [];
+        this.vriendenForm.controls.reset;
+        this.titelPoll = ""; this.naam = ""; this.antwoordenPoll = null; // tekstvelden terug leegmaken, zodat de gebruiker een volgende poll kan maken
+       }
+     },
+     (err: HttpErrorResponse) => {
+       console.log(err.error);
+       console.log(err.message);
+       this.handleError(err);
+      });
   }
-
-  // deleteVriend(vriend: string){
-  //    const index: number =  this.mailadressenVrienden.indexOf(vriend);
-  //   if (index !== -1) {
-  //     this.mailadressenVrienden.splice(index, 1);
-  //   }   
-  //   console.log(this.mailadressenVrienden);     
-   
-  // }
-
  
     deleteAntwoord(antwoord: string){
     const index: number =  this.antwoorden.indexOf(antwoord);
@@ -221,6 +134,5 @@ vrienden: Gebruiker[] = [];
      this.antwoorden.splice(index, 1);
    }   
    console.log(this.antwoorden);     
-  
  }
 }
