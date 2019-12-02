@@ -22,153 +22,112 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   private addVriendComponent = AddVriendComponent;
   private addPollComponent = AddPollComponent;
-  tekstVriendschapverzoeken : string = "";
-  tekstPollUitnodigingen : string = "";
+  tekstVriendschapverzoeken: string = "";
+  tekstPollUitnodigingen: string = "";
   aantalVriendschapverzoeken: number = 0;
   aantalPollUitnodigingen: number = 0;
   vriendschapverzoekenSub: Subscription;
   pollSub: Subscription;
   vrienden: Gebruiker[] = [];
-  aantalVrienden : number = 0; // totaal aantal om te tonen in de card met de vriendenlijst
+  aantalVrienden: number = 0; // totaal aantal om te tonen in de card met de vriendenlijst
   aantalPolls: number = 0;      // totaal aantal om te tonen in de card van met de lijst van polls polls
   mijnGemaaktePolls: Observable<Poll[]>; // polls die door de gebruiker zijn gemaakt
   pollsVrienden: Observable<Poll[]>; // polls van vrienden waarop de gebruiker moet stemmen
-  //mijnGemaaktePolls: Poll[] = []; // polls die door de gebruiker zijn gemaakt
-  //pollsVrienden: Poll[] = []; // polls van vrienden waarop de gebruiker moet stemmen
-  pollsGebruiker: PollGebruiker[] = []; 
+  pollsGebruiker: PollGebruiker[] = [];
   faPollH = faPollH;
   faPoll = faPoll;
   gebruikerID: number = 0;
-  constructor(private _authenticateService : AuthenticateService, private _vriendenService: VriendenService, public dialog: MatDialog, private _pollService: PollsService, private router: Router) {
-   
-    this._authenticateService.isLoggedin.subscribe(e=> {
+  constructor(private _authenticateService: AuthenticateService, private _vriendenService: VriendenService, public dialog: MatDialog, private _pollService: PollsService, private router: Router) {
+
+    this._authenticateService.isLoggedin.subscribe(e => {
       //Do something with the value of this BehaviorSubject
       //Every time the value changes this code will be triggered
       this.gebruikerID = new Number(localStorage.getItem("gebruikerID")).valueOf();
-     this.getAantalVriendschapverzoeken();
-     this.getVrienden();
-     this.getPollsGebruiker();
-     this.getMijnGemaaktePolls();
-     this.getPollsVrienden();
-     console.log(this.pollsVrienden);
-     console.log(this.mijnGemaaktePolls);
-      })
+      this.getAantalVriendschapverzoeken();
+      this.getVrienden();
+      this.getPollsGebruiker();
+      this.getMijnGemaaktePolls();
+      this.getPollsVrienden();
+      console.log(this.pollsVrienden);
+      console.log(this.mijnGemaaktePolls);
+    })
 
-      this._pollService.pollIsToegevoegd.subscribe(e=> {
-        //Do something with the value of this BehaviorSubject
-        //Every time the value changes this code will be triggered
-        console.log(e);
-        if(e == true){
-          this.getMijnGemaaktePolls();
-        }
-        }) 
-   }
+    this._pollService.pollIsToegevoegd.subscribe(e => {
+      //Do something with the value of this BehaviorSubject
+      //Every time the value changes this code will be triggered
+      console.log(e);
+      if (e == true) {
+        this.getMijnGemaaktePolls();
+      }
+    })
+  }
 
   ngOnInit() { }
 
-  getAantalVriendschapverzoeken(){
-   // console.log("test vriendschapverzoeken");
+  getAantalVriendschapverzoeken() {
     this.vriendschapverzoekenSub = this._vriendenService.getVriendschapverzoekenByGebruiker().subscribe(result => {
       this.aantalVriendschapverzoeken = result.length;
 
-      if(this.aantalVriendschapverzoeken == 1){
+      if (this.aantalVriendschapverzoeken == 1) {
         this.tekstVriendschapverzoeken = "nieuw vriendschapverzoek";
       }
-      else{
+      else {
         this.tekstVriendschapverzoeken = "nieuwe vriendschapverzoeken";
       }
     })
   }
 
-  // getAantalPollUitnodigen(){
-  //   console.log("test pollverzoeken");
-  //   this.vriendschapverzoekenSub = this._vriendenService.getVriendschapverzoekenByGebruiker().subscribe(result => {
-  //     this.aantalVriendschapverzoeken = result.length;
-
-  //     if(this.aantalVriendschapverzoeken == 1){
-  //       this.tekstVriendschapverzoeken = "nieuw vriendschapverzoek";
-  //     }
-  //     else{
-  //       this.tekstVriendschapverzoeken = "nieuwe vriendschapverzoeken";
-  //     }
-  //   })
-  // }
-  getPollsGebruiker(){
+  getPollsGebruiker() {
     this._pollService.getPollsGebruiker().subscribe(result => {
       console.log(result);
       this.pollsGebruiker = result;
       this.aantalPollUitnodigingen = result.length;
 
-      if(this.aantalPollUitnodigingen == 1){
+      if (this.aantalPollUitnodigingen == 1) {
         this.tekstPollUitnodigingen = "nieuwe uitnodiging";
       }
-      else{
+      else {
         this.tekstPollUitnodigingen = "nieuwe uitnodigingen";
       }
     })
   }
 
-  getMijnGemaaktePolls(){
+  getMijnGemaaktePolls() {
     this.mijnGemaaktePolls = this._pollService.getPolls()
-    .pipe(
-      map(polls => { return polls.filter(poll => poll.makerID == this.gebruikerID);} 
+      .pipe(
+        map(polls => { return polls.filter(poll => poll.makerID == this.gebruikerID); }
+        )
       )
-    )
   }
 
-  getPollsVrienden(){
+  getPollsVrienden() {
     this.pollsVrienden = this._pollService.getPolls()
-    .pipe(
-      map(polls => {return polls.filter(poll => poll.lijstGebruikersPerPoll.filter(gebruiker => gebruiker.gebruikerID == this.gebruikerID).filter(gebruiker => gebruiker.heeftGestemd == false));} )
-      ,tap(t => {
-        this.aantalPolls = t.length;
-      })
+      .pipe(
+        map(polls => { return polls.filter(poll => poll.lijstGebruikersPerPoll.filter(gebruiker => gebruiker.gebruikerID == this.gebruikerID).filter(gebruiker => gebruiker.heeftGestemd == false)); })
+        , tap(t => {
+          this.aantalPolls = t.length;
+        })
       )
   }
 
-  stemOpPoll(p){
+  stemOpPoll(p) {
     localStorage.setItem("pollObject", JSON.stringify(p));
     this.router.navigate(['/polls']);
   }
 
-  // getPollsVrienden(){
-  //   this._pollService.getPolls().subscribe(result => {
-  //     this.pollsVrienden = result.filter(poll => poll.lijstGebruikersPerPoll.filter(gebruiker => gebruiker.gebruikerID == this.gebruikerID && gebruiker.heeftGestemd == false));
-  //   })
-  //   console.log(this.pollsVrienden);
-   
-  // }
+  getVrienden() {
+    this._vriendenService.getVriendenByGebruiker().subscribe(result => {
+      console.log(result);
+      this.vrienden = result;
+      this.aantalVrienden = result.length;
+    })
+  }
 
-   // getAantalGebruikers(){
-  //   console.log("test");
-  //   this.gebruikers = this._gebruikerService.getGebruikers()
-  //   .pipe(
-  //     map(result => {
-  //       return result;
-  //     }),
-  //     tap(t => {
-  //       console.log(t);
-  //       console.log(t.length);
-  //       this.aantalGebruikers = t.length;})
-  //   );
-  // }
+  public addVriend() {
+    this.dialog.open(this.addVriendComponent);
+  }
 
-
- 
-getVrienden(){
-  this._vriendenService.getVriendenByGebruiker().subscribe(result => {
-    console.log(result);
-    this.vrienden = result;
-    this.aantalVrienden = result.length;
-  })
-}
-
-public addVriend() {
-  this.dialog.open(this.addVriendComponent);
-}
-
-public addPoll() {
-  this.dialog.open(this.addPollComponent, {width: '50%', height: '70%', panelClass: 'custom-modalbox'});
-}
-
+  public addPoll() {
+    this.dialog.open(this.addPollComponent, { width: '50%', height: '70%', panelClass: 'custom-modalbox' });
+  }
 }

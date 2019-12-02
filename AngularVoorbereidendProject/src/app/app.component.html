@@ -1,6 +1,5 @@
 <mat-toolbar class="toolbar">
   <mat-toolbar-row>
-    <!-- <span class="fill-remaining-space"></span> -->
       <h1>Poll&Friends</h1>
       <span class="menu-spacer"></span>
     <div>
@@ -8,16 +7,8 @@
       <a mat-button routerLink="/inloggen" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="toonBasisRoutes">Inloggen</a>
       <a mat-button routerLink="/registreren" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" *ngIf="toonBasisRoutes">Registreren</a>
       <!-- <a mat-button [routerLink]="['/activeren', id, activatiecode ]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Account activeren</a> -->
-      <!-- <a mat-button routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a> -->
-    </div>
-    <!-- <span class="menu-spacer"></span> -->
-    <!-- <h1 id="titel">Poll&Friends</h1> -->
-      
+    </div>      
  </mat-toolbar-row>
 </mat-toolbar>
-<!-- <div id="page-wrapper">
-  <div class="container-fluid">
-  </div>
-</div> -->
 <router-outlet></router-outlet> 
 

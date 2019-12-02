@@ -5,9 +5,6 @@ import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { AddPollComponent } from './add-poll/add-poll.component';
 
-
-
-
 @NgModule({
   declarations: [PollsComponent, AddPollComponent],
   imports: [

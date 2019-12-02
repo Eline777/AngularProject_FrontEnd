@@ -6,7 +6,7 @@ export class Gebruiker {
     gebruikerID: number;
     voornaam: string;
     achternaam: string;
-    constructor( email: string, wachtwoord: string, gebruikersnaam: string, token: string, voornaam: string, achternaam: string){
+    constructor(email: string, wachtwoord: string, gebruikersnaam: string, token: string, voornaam: string, achternaam: string) {
         this.email = email;
         this.wachtwoord = wachtwoord;
         this.gebruikersnaam = gebruikersnaam;

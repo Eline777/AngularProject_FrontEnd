@@ -1,23 +1,15 @@
 <div class="home-container">
     <div class="home-inner-container">
         <div>
-            <!-- <div>
-                    <label>aantal gebruikers: {{  aantalGebruikersNumber}}</label><br/>
-                    <label>aantal polls: {{aantalPolls}}</label>
-            </div> -->
             <div>
-                    <img src="../../assets/images/LogoHome.png">
+                <img src="../../assets/images/LogoHome.png">
             </div>
-           <div class="row">
-                <!-- <button class="col-5" mat-button routerLink="/inloggen" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inloggen</button>
-                <span class="col-2"></span>
-                <button class="col-5" mat-button routerLink="/registreren" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Registreren</button> -->
+            <div class="row">
                 <label class="col-5">{{aantalGebruikers}} gebruiker(s)</label>
                 <span class="col-2"></span>
                 <label class="col-5">{{aantalPolls}} poll(s)</label>
-           </div>
+            </div>
         </div>
     </div>
 </div>
-<router-outlet></router-outlet> 
-
+<router-outlet></router-outlet>

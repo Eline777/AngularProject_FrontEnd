@@ -49,13 +49,6 @@
                                         </button>
                                     </mat-form-field>
                                 </p>
-                                <!-- <p>
-                                    <mat-form-field>
-                                        <input matInput placeholder="Paswoord" class="form-control input-pill"
-                                            type="password" required [(ngModel)]="gebruikerRegistreer.wachtwoord"
-                                            name="wachtwoord" #passwordcontrol />
-                                    </mat-form-field>
-                                </p> -->
                                 <p>
                                     <mat-form-field>
                                         <input matInput placeholder="Bevestig paswoord" class="form-control input-pill"
@@ -68,7 +61,6 @@
                                         </button>
                                     </mat-form-field>
                                 </p>
-                                <!-- <p>Control state: {{passwordcontrol.className}}</p> -->
                                 <p>
                                     <button mat-raised-button color="primary" type="submit"
                                         [disabled]="!gebruikerRegistreerForm.form.valid || submitted">Registreren</button>
@@ -82,7 +74,6 @@
                     <div class="panel-heading panel-heading-divider">Inloggen</div>
                     <div class="panel-body">
                         <form #gebruikerLoginForm="ngForm" (ngSubmit)="onSubmit()">
-                            <!-- <p>{{ gebruikerLogin | json}}</p> -->
                             <div class="input-container">
                                 <p>
                                     <mat-form-field>
@@ -102,7 +93,6 @@
                                         </button>
                                     </mat-form-field>
                                 </p>
-                                <!-- <p>Control state: {{passwordcontrol.className}}</p> -->
                                 <p>
                                     <button mat-raised-button color="primary" type="submit"
                                         [disabled]="!gebruikerLoginForm.form.valid || submitted">Inloggen</button>

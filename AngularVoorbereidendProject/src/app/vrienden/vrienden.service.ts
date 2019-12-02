@@ -13,27 +13,15 @@ export class VriendenService {
 
   getVriendenByGebruiker(): Observable<Gebruiker[]> {
     var gebruikerID = new Number(localStorage.getItem("gebruikerID")).valueOf();
-   // let paramsGebruiker = new HttpParams().set('gebruikerID', localStorage.getItem("gebruikerID"));
     return this.http.get<Gebruiker[]>("https://localhost:44399/api/vriendschap/vrienden/" + gebruikerID);
   }
 
-  // getVriendenByGebruiker(): Observable<any> {
-  //   let paramsGebruiker = new HttpParams().set('gebruikerID', localStorage.getItem("gebruikerID"));
-  //   return this.http.get("https://localhost:44399/api/vriendschap/vrienden/", {params: paramsGebruiker});
-  // }
-
-  // getVriendschapverzoekenByGebruiker(): Observable<Vriendschap[]> {
-  //   return this.http.get<Vriendschap[]>("https://localhost:44399/api/vriendschap/vriendschapverzoeken", { 
-  //     headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("token")),
-  //     params: new HttpParams().set("gebruikerID", localStorage.getItem("gebruikerID"))
-  //   }} );
-
-    getVriendschapverzoekenByGebruiker(): Observable<Vriendschap[]> {
-      var gebruikerID = new Number(localStorage.getItem("gebruikerID")).valueOf();
-      return this.http.get<Vriendschap[]>("https://localhost:44399/api/vriendschap/vriendschapverzoeken/" + gebruikerID );
+  getVriendschapverzoekenByGebruiker(): Observable<Vriendschap[]> {
+    var gebruikerID = new Number(localStorage.getItem("gebruikerID")).valueOf();
+    return this.http.get<Vriendschap[]>("https://localhost:44399/api/vriendschap/vriendschapverzoeken/" + gebruikerID);
   }
 
   addVriendschap(vriendschap: Vriendschap) {
     return this.http.post<any>("https://localhost:44399/api/vriendschap", vriendschap);
-    }
+  }
 }

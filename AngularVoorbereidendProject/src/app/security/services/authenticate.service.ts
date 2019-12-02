@@ -12,13 +12,10 @@ export class AuthenticateService {
   public huidigeGebruiker: Observable<Gebruiker>;
   constructor(private _httpClient: HttpClient) { }
 
- 
-
   logout() {
     // remove user from local storage and set current user to null
     //localStorage.removeItem("token");
     localStorage.clear();
-   // this.isLoggedin = new BehaviorSubject(false);
    this.isLoggedin = new BehaviorSubject(localStorage.getItem("token") ? true : false);
   }
 

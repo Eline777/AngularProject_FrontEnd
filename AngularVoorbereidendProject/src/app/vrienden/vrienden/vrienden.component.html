@@ -3,49 +3,50 @@
     <div class="container-fluid">
         <div class="row row-stat">
             <div class="col-sm-12">
-            <div class="panel panel-default ">
-                <div class="panel-heading panel-heading-divider"></div>
-                <div class="panel-body">
-
-                    <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
-                        <mat-card>
-                            <mat-card-header>
-                                <div mat-card-avatar class="cards-header-image"><i
-                                        class="material-icons md-24">group</i>
-                                </div>
-                                <mat-card-title>Vrienden</mat-card-title>
-                                <mat-card-subtitle>{{aantalVrienden}}</mat-card-subtitle>
-                            </mat-card-header>
-                            <mat-card-content>
-                                <mat-list class="scrollableList" #items name="vrienden">
-                                    <mat-list-item *ngFor="let vriend of vrienden">
-                                        {{vriend.voornaam}} {{vriend.achternaam}}
-                                    </mat-list-item>
-                                </mat-list>
-                            </mat-card-content>
-                            <mat-card-actions>
-                                <button mat-raised-button color="primary" (click)="addVriend()">Vriend
-                                    uitnodigen</button>
-                            </mat-card-actions>
-                        </mat-card>
-                    </div>
-                    <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
-                        <mat-card>
-        <mat-card-header>
-            <mat-card-title>Vriendschapverzoeken</mat-card-title>
-            <mat-card-subtitle>{{aantalVriendschapverzoeken}} {{tekstVriendschapverzoeken}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-                <mat-list class="scrollableList" #items name="vriendschapverzoeken">
-                        <mat-list-item *ngFor="let vriendschap of vriendschapverzoeken">
-                            {{vriendschap.VriendschapID} 
-                        </mat-list-item>
-                    </mat-list>
-        </mat-card-content>
-    </mat-card>
+                <div class="panel panel-default ">
+                    <div class="panel-heading panel-heading-divider"></div>
+                    <div class="panel-body">
+                        <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+                            <mat-card>
+                                <mat-card-header>
+                                    <div mat-card-avatar class="cards-header-image"><i
+                                            class="material-icons md-24">group</i>
+                                    </div>
+                                    <mat-card-title>Vrienden</mat-card-title>
+                                    <mat-card-subtitle>{{aantalVrienden}}</mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <mat-list class="scrollableList" #items name="vrienden">
+                                        <mat-list-item *ngFor="let vriend of vrienden">
+                                            {{vriend.voornaam}} {{vriend.achternaam}}
+                                        </mat-list-item>
+                                    </mat-list>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                    <button mat-raised-button color="primary" (click)="addVriend()">Vriend
+                                        uitnodigen</button>
+                                </mat-card-actions>
+                            </mat-card>
+                        </div>
+                        <div class="col-xxxl-6 col-xxl-6 col-lg-6 col-md-6">
+                            <mat-card>
+                                <mat-card-header>
+                                    <mat-card-title>Vriendschapverzoeken</mat-card-title>
+                                    <mat-card-subtitle>{{aantalVriendschapverzoeken}} {{tekstVriendschapverzoeken}}
+                                    </mat-card-subtitle>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <mat-list class="scrollableList" #items name="vriendschapverzoeken">
+                                        <mat-list-item *ngFor="let vriendschap of vriendschapverzoeken">
+                                            {{vriendschap.VriendschapID} 
+                                        </mat-list-item>
+                                    </mat-list>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div></div>
+    </div>
 </div>

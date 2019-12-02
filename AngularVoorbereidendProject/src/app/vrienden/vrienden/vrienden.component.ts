@@ -15,27 +15,27 @@ import { Vriendschap } from '../models/vriendschap.model';
 export class VriendenComponent implements OnInit {
   private addVriendComponent = AddVriendComponent;
   vrienden: Gebruiker[] = [];
-  aantalVrienden : number = 0; // totaal aantal om te tonen in de card met de vriendenlijst
+  aantalVrienden: number = 0; // totaal aantal om te tonen in de card met de vriendenlijst
   faEdit = faEdit;
-   faCheck = faCheck;
-   faTrash = faTrash;
-   faCheckCircle = faCheckCircle;
-   faPlus = faPlus;
-   faPlusCircle = faPlusCircle;
-   vriendschapverzoekenSub: Subscription;
-   vriendschapverzoeken: Vriendschap[] = [];
-   aantalVriendschapverzoeken: number = 0;
-   tekstVriendschapverzoeken : string = "";
+  faCheck = faCheck;
+  faTrash = faTrash;
+  faCheckCircle = faCheckCircle;
+  faPlus = faPlus;
+  faPlusCircle = faPlusCircle;
+  vriendschapverzoekenSub: Subscription;
+  vriendschapverzoeken: Vriendschap[] = [];
+  aantalVriendschapverzoeken: number = 0;
+  tekstVriendschapverzoeken: string = "";
 
   constructor(private _vriendenService: VriendenService, public dialog: MatDialog) {
     this.getVrienden();
     this.getVriendschapverzoeken();
-   }
+  }
 
   ngOnInit() {
   }
 
-  getVrienden(){
+  getVrienden() {
     this._vriendenService.getVriendenByGebruiker().subscribe(result => {
       console.log(result);
       this.vrienden = result;
@@ -43,21 +43,19 @@ export class VriendenComponent implements OnInit {
     })
   }
 
-  getVriendschapverzoeken(){
-    // console.log("test vriendschapverzoeken");
-     this.vriendschapverzoekenSub = this._vriendenService.getVriendschapverzoekenByGebruiker().subscribe(result => {
-       this.vriendschapverzoeken = result;
- 
-       if(this.aantalVriendschapverzoeken == 1){
-         this.tekstVriendschapverzoeken = "nieuw vriendschapverzoek";
-       }
-       else{
-         this.tekstVriendschapverzoeken = "nieuwe vriendschapverzoeken";
-       }
-     })
-   }
+  getVriendschapverzoeken() {
+    this.vriendschapverzoekenSub = this._vriendenService.getVriendschapverzoekenByGebruiker().subscribe(result => {
+      this.vriendschapverzoeken = result;
 
-  
+      if (this.aantalVriendschapverzoeken == 1) {
+        this.tekstVriendschapverzoeken = "nieuw vriendschapverzoek";
+      }
+      else {
+        this.tekstVriendschapverzoeken = "nieuwe vriendschapverzoeken";
+      }
+    })
+  }
+
   public addVriend() {
     this.dialog.open(this.addVriendComponent);
   }

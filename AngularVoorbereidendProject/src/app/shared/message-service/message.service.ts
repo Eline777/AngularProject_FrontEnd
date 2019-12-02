@@ -1,5 +1,3 @@
-
-
 import { Observable } from 'rxjs';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { Injectable } from '@angular/core';
@@ -18,7 +16,6 @@ export class MessagesService {
     this.dialogRef.componentInstance.message = message;
 
     return this.dialogRef.afterClosed();
-
     // Nothing can live after afterClosed.
   }
 

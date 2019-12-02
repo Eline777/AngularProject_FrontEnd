@@ -9,7 +9,6 @@ import { GebruikerService } from 'src/app/gebruikers/gebruiker.service';
 })
 export class AccountActivatieComponent implements OnInit {
 tekstActivatieSuccesvol: string = "Uw account werd succesvol geactiveerd. U kan nu inloggen.";
-// tekstVoorActivatie: string = "Gelieve via de link in uw mail uw registratie te bevestigen";
 teTonenTekst: string = "Gelieve via de link in uw mail uw registratie te bevestigen";
   constructor(private activatedRoute: ActivatedRoute, private _gebruikerService: GebruikerService ) { 
     activatedRoute.paramMap.subscribe(result => {
@@ -17,7 +16,6 @@ teTonenTekst: string = "Gelieve via de link in uw mail uw registratie te bevesti
       var code = result.get('activatiecode');
       console.log(code);
       this.controleerActivatiecode(code);
-      
     })
   }
 
@@ -27,12 +25,9 @@ teTonenTekst: string = "Gelieve via de link in uw mail uw registratie te bevesti
   controleerActivatiecode(code: any){
     this._gebruikerService.controleerActivatieGebruiker(code).subscribe(result => {
       console.log(result);
-      //const emailConfirmationResponse = result.json();
        if(result = true){
-        //this.router.navigateByUrl("/inloggen");
         this.teTonenTekst = this.tekstActivatieSuccesvol;
        }
-      
     });
   }
 }

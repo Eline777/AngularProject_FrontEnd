@@ -212,7 +212,6 @@ ul#side-menu li.user-pro a small {
 }
 
 .cards-header-image {
-  // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }
 
@@ -1197,59 +1196,3 @@ span.input-group-btn {
 .myAccordion{
   margin: 3px;
 }
-
-// .custom-modalbox >  mat-dialog-container {
-//   padding: 0px;
-// }
-// .custom-modalbox {
-//   mat-dialog-container {
-//       padding: 0;
-//   }
-// }
-
-// jw-modal {
-//   /* modals are hidden by default */
-//   display: none;
-
-//   .jw-modal {
-//       /* modal container fixed across whole screen */
-//       position: fixed;
-//       top: 0;
-//       right: 0;
-//       bottom: 0;
-//       left: 0;
-
-//       /* z-index must be higher than .jw-modal-background */
-//       z-index: 1000;
-      
-//       /* enables scrolling for tall modals */
-//       overflow: auto;
-
-//       .jw-modal-body {
-//           padding: 20px;
-//           background: #fff;
-
-//           /* margin exposes part of the modal background */
-//           margin: 40px;
-//       }
-//   }
-
-//   .jw-modal-background {
-//       /* modal background fixed across whole screen */
-//       position: fixed;
-//       top: 0;
-//       right: 0;
-//       bottom: 0;
-//       left: 0;
-
-//       /* semi-transparent black  */
-//       background-color: #000;
-//       opacity: 0.75;
-      
-//       /* z-index must be below .jw-modal and above everything else  */
-//       z-index: 900;
-//   }
-// }
-
-  
-  

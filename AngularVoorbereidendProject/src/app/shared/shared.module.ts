@@ -11,9 +11,6 @@ import { AppRoutingModule } from '../app-routing.module';
 import { VriendenService } from '../vrienden/vrienden.service';
 import { MessageComponent } from './message-service/message/message.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-//import { DialogComponent } from './dialog/dialog/dialog.component';
-//import { DialogService } from './dialog/dialog.service';
-//import { VriendenModule } from '../vrienden/vrienden.module';
 
 @NgModule({
   declarations: [NavigatieComponent, MessageComponent,],
@@ -49,10 +46,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatOptionModule,
     FontAwesomeModule,
     MatRadioModule
-    // DialogComponent,
-    // DialogService,
-   // VriendenModule
-
   ],
   providers: [GebruikerService, PollsService, AuthenticateService, VriendenService]
 })

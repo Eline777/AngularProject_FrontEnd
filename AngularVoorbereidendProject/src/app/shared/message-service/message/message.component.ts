@@ -14,17 +14,14 @@ export class MessageComponent implements OnInit {
       private dialogRef: MatDialogRef<MessageComponent>,
     ) { }
   
-  
     private closeWithTimer() {
       setTimeout (() => {
         this.dialogRef.close();
       }, 4000);
     }
   
-  
     ngOnInit() {
       this.closeWithTimer();
     }
-  
   }
   

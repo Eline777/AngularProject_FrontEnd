@@ -5,17 +5,7 @@ body{
 img {
     max-width: 100%;
 }
-/* .profile-img {
-    width: 150px;
-    height: 150px;
-    -webkit-border-radius: 200px;
-    -moz-border-radius: 200px;
-    border-radius: 200px;
-    overflow: hidden;
-    margin: 10px auto;
-    box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.15);
-    border: 4px solid rgba(204, 204, 204, 0.12);
-} */
+
 li.user-pro {
     text-align: center!important;
 }
@@ -43,7 +33,6 @@ li.user-pro a:hover span, li.user-pro a:hover small {
 }
 
 .panel.panel-dark .panel-icon .fa {
-    /* color: #5c6270; */
     color: #1f6b9e;
 }
 

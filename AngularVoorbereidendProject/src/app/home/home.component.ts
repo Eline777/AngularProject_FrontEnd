@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GebruikerService } from '../gebruikers/gebruiker.service';
 import { Observable, Subscription } from 'rxjs';
 import { Gebruiker } from '../gebruikers/models/gebruiker.model';
-import { map, tap } from 'rxjs/operators';
 import { PollsService } from '../polls/polls.service';
 
 @Component({
@@ -21,46 +20,22 @@ export class HomeComponent implements OnInit {
     this.getAantalGebruikers();
     this.getAantalPolls();
     console.log(this.aantalPolls);
-    
-   }
+  }
 
   ngOnInit() {
   }
 
-  // getAantalGebruikers(){
-  //   console.log("test");
-  //   this.gebruikers = this._gebruikerService.getGebruikers()
-  //   .pipe(
-  //     map(result => {
-  //       return result;
-  //     }),
-  //     tap(t => {
-  //       console.log(t);
-  //       console.log(t.length);
-  //       this.aantalGebruikers = t.length;})
-  //   );
-  // }
-
-  getAantalGebruikers(){
+  getAantalGebruikers() {
     console.log("test");
     this.aantalGebruikersSub = this._gebruikerService.getAantalGebruikers().subscribe((aantal: number) => {
       this.aantalGebruikers = aantal;
     })
   }
 
-  getAantalPolls(){
+  getAantalPolls() {
     console.log("test");
     this.aantalPollsSub = this._pollService.getAantalPolls().subscribe((aantal: number) => {
       this.aantalPolls = aantal;
     })
   }
-
-  // getAantalGebruikers(){
-  //   console.log("test");
-  //   this._gebruikerService.getAantalGebruikers().subscribe(result => {
-  //     this.aantalGebruikers = result;
-  //   }
-      
-  //   );
-  // }
 }
